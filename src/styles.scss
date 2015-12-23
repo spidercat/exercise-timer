@@ -1,0 +1,120 @@
+$dark-grey: #212121; //grey darken-4
+$red: #f44336; //red
+$green: #66bb6a; //green lighten-1
+$main: #00bcd4; 
+$main-dark: #00acc1;
+
+@mixin border {
+	border: 5px solid $dark-grey;
+}
+
+@mixin center-el {
+	display: block;
+	//margin-left: auto;
+	//margin-right: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+
+/* Default/layout
+===================================*/
+html {
+	color: $dark-grey;
+}
+
+
+
+
+/* Top Bar
+===================================*/
+#top-bar {
+	background-color: $main;
+	margin-top: -1.5em;
+	color: $dark-grey;
+	h3 {
+		padding-top: .1em;
+		font-weight: 500;
+		text-align: center;
+		
+	}
+	
+	h5 {
+		color: white;
+		background-color: $main-dark;
+		text-align: center;
+		margin-top: -1.3em;
+		padding-bottom: .2em;
+	}
+}
+
+
+
+
+/* Main app
+====================================*/
+
+#app-wrapper {
+	@include border;
+	@include center-el;
+	height: 21.5em;
+}
+
+// Buttons
+#button-wrapper {
+	@include center-el;
+	margin-top: 3em;
+	margin-bottom: .5em;
+}
+
+// Time left and rounds left
+#timer {
+	padding: 0;
+	margin: 0;
+}
+
+#time-left {
+	border-right: 5px solid $dark-grey;
+	height: 20.85em;
+}
+
+#round {
+	background-color: #e0e0e0;
+	height: 20.85em;
+}
+
+
+
+
+//Right bar of options
+#options {
+	border-left: 5px solid $dark-grey;
+	display: inline;
+
+}
+
+.option-input {
+	height: 5em;
+	border-top: 5px solid $dark-grey;
+	//To fill length with border
+	margin-left: -1.1em;
+	margin-right: -1.5em;
+	p {
+		display: inline-block;
+		float: left;
+		margin-left: .8em;
+		width: 4em;
+	}
+	
+	input {
+		display: inline-block;
+		float: left;
+		margin-left: 20px;
+		width: 4em;
+		text-align: center;
+	}
+}
+
+
+

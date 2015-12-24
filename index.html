@@ -2,17 +2,18 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Workout Timer/Tabata Timer</title>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-  <link type="text/css" rel="stylesheet" href="dist/styles.css" />
+  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="dist/styles.css">
 
 </head>
 
-<body>
+<body ng-app="tabataApp">
 
-  <div id="wrapper">
+  <div id="wrapper" ng-controller="tabataAppCtrl">
 
     <!--Title bar -->
     <div id="top-bar">
@@ -20,29 +21,31 @@
       <br>
       <h5 class="z-depth-2">Preset for a Tabata workout, but adjust for any intervals!</h5>
     </div>
-		
-		<!--Timer control buttons-->
-		<div id="button-wrapper">
-			<a class="waves-effect waves-light btn teal lighten-2"><i class="material-icons left">alarm_on</i>Start</a>
-			<a class="waves-effect waves-light btn teal lighten-2"><i class="material-icons left">pause</i>Pause</a>
-			<a class="waves-effect waves-light btn #ff7043 teal"><i class="material-icons left">stop</i>Clear</a>
-		</div>
-		
-		<!--End timer control buttons-->
+
+    <!--Timer control buttons-->
+    <div id="button-wrapper">
+      <a class="waves-effect waves-light btn teal"><i class="material-icons left">alarm_on</i>Start</a>
+      <a class="waves-effect waves-light btn teal"><i class="material-icons left">pause</i>Pause</a>
+      <a class="waves-effect waves-light btn #ff7043 teal lighten-2"><i class="material-icons left">stop</i>Clear</a>
+    </div>
+
+    <!--End timer control buttons-->
 
     <!--Timer-->
     <div class="row">
-      <div class="col s8 offset-s2" id="app-wrapper">
+      <div class="col s8 offset-s2 z-depth-2" id="app-wrapper">
         <!--Parent grid/wrapper-->
         <div class="row">
           <!--Clock & 2/8 cycles-->
           <div class="col s9" id="timer">
             <div class="row">
               <div class="col s8" id="time-left">
-                <h4>Time left<br>(:35)</h4>
+                <div id="progress-circle">
+                  <h4>Time left<br>{{timeLeft}}</h4>
+                </div>
               </div>
               <div class="col s4" id="round">
-                <h5>Round<br>(2/8)</h5>
+                <h5>Round<br>{{roundsLeft}}</h5>
               </div>
             </div>
           </div>
@@ -50,17 +53,33 @@
           <!--Options grid-->
           <div class="col s3" id="options">
             <div class="switch">
-							<p>Volume:<p>
-              <label>
-                Off
-                <input type="checkbox">
-                <span class="lever"></span>
-                On
-              </label>
+              <p>Volume:
+                <p>
+                  <label>
+                    Off
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    On
+                  </label>
             </div>
-						<div class="option-input"><p>Time on:</p><input type="text" value="00:20"></div>
-						<div class="option-input"><p>Time off:</p><input type="text" value="00:10"></div>
-						<div class="option-input"><p>Rounds:</p><input type="text" value="8"></div>
+            <div class="option-input">
+              <p>Time on:</p>
+              <i class="material-icons adjust" ng-click="changeValue('timeOn', -1)">remove</i>
+              <p>{{timeOn}}</p>
+              <i class="material-icons adjust" ng-click="changeValue('timeOn', +1)">add</i>
+            </div>
+            <div class="option-input">
+              <p>Time off:</p>
+              <i class="material-icons adjust">remove</i>
+              <p>{{timeOff}}</p>
+              <i class="material-icons adjust">add</i>
+            </div>
+            <div class="option-input">
+              <p>Rounds:</p>
+              <i class="material-icons adjust" ng-click="changeValue('rounds', 'minus')">remove</i>
+              <p>{{rounds}}</p>
+              <i class="material-icons adjust" ng-click="changeValue('rounds', 'plus')">add</i>
+            </div>
           </div>
         </div>
         <!--End timer-->
@@ -73,8 +92,8 @@
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="src/app.js"></script>
 </body>
 

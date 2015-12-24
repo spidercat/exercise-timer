@@ -1,7 +1,8 @@
 /* Default/layout
 ===================================*/
 html {
-  color: #212121; }
+  color: #212121;
+  background-color: #fdfdfd; }
 
 /* Top Bar
 ===================================*/
@@ -28,7 +29,8 @@ html {
   left: 0;
   right: 0;
   text-align: center;
-  height: 21.5em; }
+  height: 21.5em;
+  background-color: white; }
 
 #button-wrapper {
   display: block;
@@ -47,8 +49,20 @@ html {
   height: 20.85em; }
 
 #round {
-  background-color: #e0e0e0;
+  background-color: #fbe9e7;
   height: 20.85em; }
+
+#progress-circle {
+  display: block;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 15em;
+  width: 15em;
+  border: 5px solid aqua;
+  border-radius: 50%; }
 
 #options {
   border-left: 5px solid #212121;
@@ -61,12 +75,15 @@ html {
   margin-right: -1.5em; }
   .option-input p {
     display: inline-block;
-    float: left;
     margin-left: .8em;
+    margin-right: .8em;
     width: 4em; }
-  .option-input input {
-    display: inline-block;
-    float: left;
-    margin-left: 20px;
-    width: 4em;
-    text-align: center; }
+
+.adjust {
+  position: absolute;
+  margin-top: .6em;
+  margin-right: -1.5em;
+  color: #00acc1; }
+  .adjust:hover {
+    cursor: pointer;
+    color: #212121; }

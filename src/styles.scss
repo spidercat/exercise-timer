@@ -22,6 +22,7 @@ $main-dark: #00acc1;
 ===================================*/
 html {
 	color: $dark-grey;
+	background-color: #fdfdfd;
 }
 
 
@@ -59,6 +60,7 @@ html {
 	@include border;
 	@include center-el;
 	height: 21.5em;
+	background-color: white;
 }
 
 // Buttons
@@ -80,8 +82,18 @@ html {
 }
 
 #round {
-	background-color: #e0e0e0;
+	background-color: #fbe9e7;
 	height: 20.85em;
+}
+
+#progress-circle {
+	@include center-el;
+	margin-left: auto;
+	margin-right: auto;
+	height: 15em;
+	width: 15em;
+	border: 5px solid aqua;
+	border-radius: 50%;
 }
 
 
@@ -102,17 +114,23 @@ html {
 	margin-right: -1.5em;
 	p {
 		display: inline-block;
-		float: left;
 		margin-left: .8em;
+		margin-right: .8em;
 		width: 4em;
 	}
 	
-	input {
-		display: inline-block;
-		float: left;
-		margin-left: 20px;
-		width: 4em;
-		text-align: center;
+}
+
+// Add/subtract time icons
+.adjust {
+	position: absolute;
+	margin-top: .6em;
+	margin-right: -1.5em;
+	color: $main-dark;
+	
+	&:hover {
+		cursor: pointer;
+		color: $dark-grey;
 	}
 }
 

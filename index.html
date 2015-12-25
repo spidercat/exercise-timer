@@ -45,7 +45,7 @@
                 </div>
               </div>
               <div class="col s4" id="round">
-                <h5>Round<br>{{roundsLeft}}</h5>
+                <h5>Round<br>{{roundsLeft}}/{{rounds}}</h5>
               </div>
             </div>
           </div>
@@ -64,21 +64,21 @@
             </div>
             <div class="option-input">
               <p>Time on:</p>
-              <i class="material-icons adjust" ng-click="changeValue('timeOn', -1)">remove</i>
-              <p>{{timeOn}}</p>
-              <i class="material-icons adjust" ng-click="changeValue('timeOn', +1)">add</i>
+              <i class="material-icons adjust" ng-click="changeTimeOn('minus')">remove</i>
+              <p>{{timeOnJoined}}</p>
+              <i class="material-icons adjust" ng-click="changeTimeOn('plus')">add</i>
             </div>
             <div class="option-input">
               <p>Time off:</p>
-              <i class="material-icons adjust">remove</i>
-              <p>{{timeOff}}</p>
-              <i class="material-icons adjust">add</i>
+              <i class="material-icons adjust" ng-click="changeTimeOff('minus')">remove</i>
+              <p>{{timeOffJoined}}</p>
+              <i class="material-icons adjust" ng-click="changeTimeOff('plus')">add</i>
             </div>
             <div class="option-input">
               <p>Rounds:</p>
-              <i class="material-icons adjust" ng-click="changeValue('rounds', 'minus')">remove</i>
+              <i class="material-icons adjust" ng-click="changeRounds('minus')">remove</i>
               <p>{{rounds}}</p>
-              <i class="material-icons adjust" ng-click="changeValue('rounds', 'plus')">add</i>
+              <i class="material-icons adjust" ng-click="changeRounds('plus')">add</i>
             </div>
           </div>
         </div>

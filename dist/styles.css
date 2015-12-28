@@ -4,6 +4,9 @@ html {
   color: #212121;
   background-color: #fdfdfd; }
 
+.hidden {
+  display: none; }
+
 /* Top Bar
 ===================================*/
 #top-bar {

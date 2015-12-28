@@ -24,7 +24,7 @@
 
     <!--Timer control buttons-->
     <div id="button-wrapper">
-      <a class="waves-effect waves-light btn teal"><i class="material-icons left">alarm_on</i>Start</a>
+      <a class="waves-effect waves-light btn teal" ng-click="startClock()"><i class="material-icons left">alarm_on</i>Start</a>
       <a class="waves-effect waves-light btn teal"><i class="material-icons left">pause</i>Pause</a>
       <a class="waves-effect waves-light btn #ff7043 teal lighten-2"><i class="material-icons left">stop</i>Clear</a>
     </div>
@@ -41,7 +41,8 @@
             <div class="row">
               <div class="col s8" id="time-left">
                 <div id="progress-circle">
-                  <h4>Time left<br>{{timeLeft}}</h4>
+                  <h4 id="timeLeft" class="hidden">Time left<br>{{timeLeftJoined}}</h4>
+                  <h4 id="breakLeft">Break<br>{{breakLeftJoined}}</h4>
                 </div>
               </div>
               <div class="col s4" id="round">

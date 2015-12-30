@@ -49,23 +49,31 @@ html {
 
 #time-left {
   border-right: 5px solid #212121;
-  height: 20.85em; }
+  height: 20.85em;
+  margin-left: -.8em;
+  background-color: #ef9a9a; }
+  #time-left h3 {
+    font-weight: 500;
+    color: #424242;
+    margin-top: .2em;
+    margin-bottom: .3em; }
+
+.time-left-numbers {
+  font-weight: 600;
+  font-size: 5em;
+  color: #212121; }
 
 #round {
-  background-color: #fbe9e7;
   height: 20.85em; }
+  #round h4 {
+    font-weight: 500;
+    color: #424242; }
 
-#progress-circle {
-  display: block;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  height: 15em;
-  width: 15em;
-  border: 5px solid aqua;
-  border-radius: 50%; }
+#round-numbers {
+  margin-top: 1.5em;
+  font-weight: 600;
+  font-size: 5em;
+  color: #00acc1; }
 
 #options {
   border-left: 5px solid #212121;
@@ -85,8 +93,8 @@ html {
 .adjust {
   position: absolute;
   margin-top: .6em;
-  margin-right: -1.5em;
-  color: #00acc1; }
+  margin-left: -.5em;
+  color: #f57c00; }
   .adjust:hover {
     cursor: pointer;
     color: #212121; }

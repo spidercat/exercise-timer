@@ -111,7 +111,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 		if ($scope.roundsLeft <= $scope.rounds) {
 		
 			if ($('#timeLeft').hasClass('hidden')) {		
-				var breakLeftInterval = setInterval(function() {
+				  breakLeftInterval = setInterval(function() {
 					var seconds = parseInt($scope.breakLeft[2]);
 					if (seconds != 00) {
 						$scope.breakLeft[2] = minTwoDigits(seconds - 1);
@@ -121,6 +121,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 					else if (seconds == 00) {
 						$('#timeLeft').toggleClass('hidden');
 						$('#breakLeft').toggleClass('hidden');
+						$('#time-left').css('background-color', '#a5d6a7');
 						var tempArray = $scope.timeOff.slice();
 						$scope.breakLeft = tempArray;
 						$scope.breakLeftJoined = $scope.timeOffJoined;
@@ -133,7 +134,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 			}
 
 			else {
-				var timeLeftInterval = setInterval(function() {
+				  timeLeftInterval = setInterval(function() {
 					var seconds = parseInt($scope.timeLeft[2]);
 					if (seconds != 00) {
 						$scope.timeLeft[2] = minTwoDigits(seconds - 1);
@@ -144,6 +145,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 						$scope.roundsLeft = $scope.roundsLeft + 1;
 						$('#breakLeft').toggleClass('hidden');
 						$('#timeLeft').toggleClass('hidden');
+						$('#time-left').css('background-color', '#ef9a9a');
 					  // To hold copied array. Because apparently, assigning an array as a value
 						// creates a pointer. What the hell, JavaScript? Yes, this took me a day to solve.
 						var tempArray = $scope.timeOn.slice();
@@ -160,7 +162,13 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 		}
 	}
 	
+	// Pause timer
+	$scope.pauseClock = function() {
+		clearInterval(breakLeftInterval);
+		clearInterval(timeLeftInterval);
+	}
 	
-//	 Fix them for if minute. Two-way bind break with option. Add for loop, minus round after each timeOn. Pause and clear buttons
+	
+//	 Fix them for if minute. Two-way bind break with option. Add for loop, minus round after each timeOn. Pause and clear buttons. sound
 
 }]) // End controller

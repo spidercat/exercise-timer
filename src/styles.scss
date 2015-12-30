@@ -1,4 +1,5 @@
 $dark-grey: #212121; //grey darken-4
+$mute-grey: #424242;
 $red: #f44336; //red
 $green: #66bb6a; //green lighten-1
 $main: #00bcd4; 
@@ -81,24 +82,35 @@ html {
 #time-left {
 	border-right: 5px solid $dark-grey;
 	height: 20.85em;
+	margin-left: -.8em;
+	background-color: #ef9a9a;
+	h3 {
+		font-weight: 500;
+		color: $mute-grey;
+		margin-top: .2em;
+		margin-bottom: .3em;
+	}
+}
+
+.time-left-numbers {
+	font-weight: 600;
+	font-size: 5em;
+	color: $dark-grey;
 }
 
 #round {
-	background-color: #fbe9e7;
 	height: 20.85em;
+	h4 {
+		font-weight: 500;
+		color: $mute-grey;
+	}
 }
-
-#progress-circle {
-	@include center-el;
-	margin-left: auto;
-	margin-right: auto;
-	height: 15em;
-	width: 15em;
-	border: 5px solid aqua;
-	border-radius: 50%;
+#round-numbers {
+	margin-top: 1.5em;
+	font-weight: 600;
+	font-size: 5em;
+	color: $main-dark;
 }
-
-
 
 
 //Right bar of options
@@ -127,9 +139,8 @@ html {
 .adjust {
 	position: absolute;
 	margin-top: .6em;
-	margin-right: -1.5em;
-	color: $main-dark;
-	
+	margin-left: -.5em;
+	color: #f57c00;
 	&:hover {
 		cursor: pointer;
 		color: $dark-grey;

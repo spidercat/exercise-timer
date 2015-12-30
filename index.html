@@ -24,9 +24,9 @@
 
     <!--Timer control buttons-->
     <div id="button-wrapper">
-      <a class="waves-effect waves-light btn teal" ng-click="startClock()"><i class="material-icons left">alarm_on</i>Start</a>
-      <a class="waves-effect waves-light btn teal"><i class="material-icons left">pause</i>Pause</a>
-      <a class="waves-effect waves-light btn #ff7043 teal lighten-2"><i class="material-icons left">stop</i>Clear</a>
+      <a class="waves-effect waves-light btn orange darken-2" ng-click="startClock()"><i class="material-icons left">alarm_on</i>Start</a>
+      <a class="waves-effect waves-light btn pink orange darken-2" ng-click="pauseClock()"><i class="material-icons left">pause</i>Pause</a>
+      <a class="waves-effect waves-light btn orange"><i class="material-icons left">stop</i>Clear</a>
     </div>
 
     <!--End timer control buttons-->
@@ -40,13 +40,11 @@
           <div class="col s9" id="timer">
             <div class="row">
               <div class="col s8" id="time-left">
-                <div id="progress-circle">
-                  <h4 id="timeLeft" class="hidden">Time left<br>{{timeLeftJoined}}</h4>
-                  <h4 id="breakLeft">Break<br>{{breakLeftJoined}}</h4>
-                </div>
+                  <div id="timeLeft" class="hidden"><h3>Time left</h3><br><span class="time-left-numbers">{{timeLeftJoined}}</span></div>
+                  <div id="breakLeft"><h3>Break</h3><br><span class="time-left-numbers">{{breakLeftJoined}}</span></div>
               </div>
               <div class="col s4" id="round">
-                <h5>Round<br>{{roundsLeft}}/{{rounds}}</h5>
+								<h4>Round</h4><br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
               </div>
             </div>
           </div>

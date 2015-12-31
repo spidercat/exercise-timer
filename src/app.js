@@ -5,7 +5,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 	$scope.roundsLeft = 1;
 	
 	// Count down variables. See if I can remove values.
-	$scope.breakLeft = ['00', ':', '05'];
+	$scope.breakLeft = ['00', ':', '55'];
 	$scope.timeLeft = ['00', ':', '10'];
 	
 	$scope.breakLeftJoined = $scope.breakLeft.join('');
@@ -13,7 +13,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 	
 	// Option variables. Get copied for tempArray.
 	$scope.rounds = 8;
-	$scope.timeOff = ['00', ':', '05'];
+	$scope.timeOff = ['00', ':', '55'];
 	$scope.timeOn = ['00', ':', '10'];
 	
 	$scope.timeOnJoined = $scope.timeOn.join('');
@@ -38,29 +38,29 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 	
 	// User adjusted time on value
 	$scope.changeTimeOn = function(value) {
-		var num = parseInt($scope.timeOn[2]);
-		var min = parseInt($scope.timeOn[0]);
+		var seconds = parseInt($scope.timeOn[2]);
+		var minutes = parseInt($scope.timeOn[0]);
 		if (value === 'minus') {
-			if (num == '00') {
-				if (min == '00') {
-					$scope.timeOff[0] = minTwoDigits(min);
+			if (seconds == '00') {
+				if (minutes == '00') {
+					$scope.timeOff[0] = minTwoDigits(minutes);
 				}
 				else {
 					$scope.timeOn[2] = '59';
-					$scope.timeOn[0] = minTwoDigits(min - 1);
+					$scope.timeOn[0] = minTwoDigits(minutes - 1);
 				}
 			}
 			else {
-				$scope.timeOn[2] = minTwoDigits(num - 1);
+				$scope.timeOn[2] = minTwoDigits(seconds - 1);
 			}
 		}
 		else if (value === 'plus') {
-			if (num == '59') {
+			if (seconds == '59') {
 				$scope.timeOn[2] = '00';
-				$scope.timeOn[0] = minTwoDigits(min + 1);
+				$scope.timeOn[0] = minTwoDigits(minutes + 1);
 			}
 			else {
-				$scope.timeOn[2] = minTwoDigits(num + 1);
+				$scope.timeOn[2] = minTwoDigits(seconds + 1);
 			}
 		}
 		$scope.timeOnJoined = $scope.timeOn.join('');
@@ -72,29 +72,29 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 	
 	// User adjusted time off value
 	$scope.changeTimeOff = function(value) {
-		var num = parseInt($scope.timeOff[2]);
-		var min = parseInt($scope.timeOn[0]);
+		var seconds = parseInt($scope.timeOff[2]);
+		var minutes = parseInt($scope.timeOn[0]);
 		if (value === 'minus') {
-			if (num == '00') {
-				if (min == '00') {
-					$scope.timeOff[0] = minTwoDigits(min);
+			if (seconds == '00') {
+				if (minutes == '00') {
+					$scope.timeOff[0] = minTwoDigits(minutes);
 				}
-				else {
+				else if (minutes != '00') {
 					$scope.timeOff[2] = '59';
-					$scope.timeOff[0] = minTwoDigits(min - 1);
+					$scope.timeOff[0] = minTwoDigits(minutes - 1);
 				}
 			}
 			else {
-				$scope.timeOff[2] = minTwoDigits(num - 1);
+				$scope.timeOff[2] = minTwoDigits(seconds - 1);
 			}
 		}
 		else if (value === 'plus') {
-			if (num == '59') {
+			if (seconds == '59') {
 				$scope.timeOff[2] = '00';
-				$scope.timeOff[0] = minTwoDigits(min + 1);
+				$scope.timeOff[0] = minTwoDigits(minutes + 1);
 			}
 			else {
-				$scope.timeOff[2] = minTwoDigits(num + 1);
+				$scope.timeOff[2] = minTwoDigits(seconds + 1);
 			}
 		}
 		$scope.timeOffJoined = $scope.timeOff.join('');
@@ -107,11 +107,13 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 	
 	// Todo: Set up for minutes
 	$scope.startClock = function() {
-		
+		$('#pause-button').removeClass('hidden');
+		$('#start-button').addClass('hidden');
 		if ($scope.roundsLeft <= $scope.rounds) {
 		
 			if ($('#timeLeft').hasClass('hidden')) {		
 				  breakLeftInterval = setInterval(function() {
+					var minutes = parseInt($scope.breakLeft[0]);
 					var seconds = parseInt($scope.breakLeft[2]);
 					if (seconds != 00) {
 						$scope.breakLeft[2] = minTwoDigits(seconds - 1);
@@ -160,15 +162,41 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 			}
 			
 		}
+		else {
+			$('#pause-button').addClass('hidden');
+			$('#start-button').removeClass('hidden');		
+		}
 	}
 	
 	// Pause timer
 	$scope.pauseClock = function() {
 		clearInterval(breakLeftInterval);
 		clearInterval(timeLeftInterval);
+		$('#pause-button').addClass('hidden');
+		$('#start-button').removeClass('hidden');
+	}
+	
+	$scope.clear = function() {
+		var temp = $scope.timeOff.slice();
+		$scope.breakLeft = temp;
+		$scope.breakLeftJoined = $scope.timeOffJoined;
+		
+		$scope.roundsLeft = 1;
+		
+		var tempArray = $scope.timeOn.slice();
+		$scope.timeLeft = tempArray;
+		$scope.timeLeftJoined = $scope.timeOnJoined;
+		$scope.$apply;
+		
+		clearInterval(breakLeftInterval);
+		clearInterval(timeLeftInterval);
+		
+		$('#pause-button').addClass('hidden');
+		$('#start-button').removeClass('hidden');
+		
 	}
 	
 	
-//	 Fix them for if minute. Two-way bind break with option. Add for loop, minus round after each timeOn. Pause and clear buttons. sound
+//	 Fix them for if minute.  sound. break to over 1min then back down broken.
 
 }]) // End controller

@@ -24,9 +24,9 @@
 
     <!--Timer control buttons-->
     <div id="button-wrapper">
-      <a class="waves-effect waves-light btn orange darken-2" ng-click="startClock()"><i class="material-icons left">alarm_on</i>Start</a>
-      <a class="waves-effect waves-light btn pink orange darken-2" ng-click="pauseClock()"><i class="material-icons left">pause</i>Pause</a>
-      <a class="waves-effect waves-light btn orange"><i class="material-icons left">stop</i>Clear</a>
+      <a class="waves-effect waves-light btn orange darken-2" id="start-button" ng-click="startClock()"><i class="material-icons left">alarm_on</i>Start</a>
+      <a class="waves-effect waves-light btn pink orange darken-2 hidden" id="pause-button" ng-click="pauseClock()"><i class="material-icons left">pause</i>Pause</a>
+      <a class="waves-effect waves-light btn orange" ng-click="clear()"><i class="material-icons left">stop</i>Clear</a>
     </div>
 
     <!--End timer control buttons-->

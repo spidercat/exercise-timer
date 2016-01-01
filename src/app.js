@@ -18,6 +18,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 
     $scope.timeOnJoined = $scope.timeOn.join('');
     $scope.timeOffJoined = $scope.timeOff.join('');
+	
+		// Set volume as on
+  	$('#volumeSwitch').prop('checked', true)
 
     // Put 0 if digit less than 10
     function minTwoDigits(n) {
@@ -104,9 +107,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.breakLeft[2] = minTwoDigits(seconds - 1);
               $scope.breakLeftJoined = $scope.breakLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04)) {
+              if ((seconds >= 02) && (seconds <= 04) && ($('#volumeSwitch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if (seconds == 01) {
+              } else if ((seconds == 01) && ($('#volumeSwitch').prop('checked'))){
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
             } else if ((seconds == 00) && (minutes != 00)) {
@@ -136,9 +139,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.timeLeft[2] = minTwoDigits(seconds - 1);
               $scope.timeLeftJoined = $scope.timeLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04)) {
+              if ((seconds >= 02) && (seconds <= 04) && ($('#volumeSwitch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if (seconds == 01) {
+              } else if ((seconds == 01) && ($('#volumeSwitch').prop('checked'))) {
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
             } else if ((seconds == 00) && (minutes != 00)) {

@@ -40,11 +40,18 @@
           <div class="col s9" id="timer">
             <div class="row">
               <div class="col s8" id="time-left">
-                  <div id="timeLeft" class="hidden"><h3>Time left</h3><br><span class="time-left-numbers">{{timeLeftJoined}}</span></div>
-                  <div id="breakLeft"><h3>Break</h3><br><span class="time-left-numbers">{{breakLeftJoined}}</span></div>
+                <div id="timeLeft" class="hidden">
+                  <h3>Time left</h3>
+                  <br><span class="time-left-numbers">{{timeLeftJoined}}</span>
+                </div>
+                <div id="breakLeft">
+                  <h3>Break</h3>
+                  <br><span class="time-left-numbers">{{breakLeftJoined}}</span>
+                </div>
               </div>
               <div class="col s4" id="round">
-								<h4>Round</h4><br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
+                <h4>Round</h4>
+                <br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
               </div>
             </div>
           </div>
@@ -56,7 +63,7 @@
                 <p>
                   <label>
                     Off
-                    <input type="checkbox">
+                    <input type="checkbox" id="volumeSwitch">
                     <span class="lever"></span>
                     On
                   </label>
@@ -94,7 +101,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="src/app.js"></script>
-	<script src="dist/buzz/buzz.min.js"></script>
+  <script src="dist/buzz/buzz.min.js"></script>
 </body>
 
 </html>

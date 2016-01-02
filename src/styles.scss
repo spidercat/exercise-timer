@@ -11,8 +11,6 @@ $main-dark: #00acc1;
 
 @mixin center-el {
 	display: block;
-	//margin-left: auto;
-	//margin-right: auto;
 	left: 0;
 	right: 0;
 	text-align: center;
@@ -29,6 +27,14 @@ html {
 .hidden {
 	display: none;
 }
+
+#wrapper {
+	@include center-el;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	max-width: 2000px;
+}
+
 
 
 /* Top Bar
@@ -113,19 +119,19 @@ html {
 }
 
 
-//Right bar of options
+// Right bar of options
 #options {
 	border-left: 5px solid $dark-grey;
-	display: inline;
-
+	display: block;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .option-input {
 	height: 5em;
 	border-top: 5px solid $dark-grey;
-	//To fill length with border
-	margin-left: -1.1em;
-	margin-right: -1.5em;
+	box-sizing: border-box;
+	width: 105.1%;
 	p {
 		display: inline-block;
 		margin-left: .8em;
@@ -148,4 +154,71 @@ html {
 }
 
 
+/* Media Queries
+====================================*/
+@media screen and (max-width: 1400px) {
+	.option-input {
+		width: 107%;
+	}
+}
 
+
+@media screen and (max-width: 1215px) {
+	.adjust-minus {
+		margin-left: -.4em;
+	}
+	
+	.adjust-plus {
+		margin-left: -.8em;
+	}
+	
+	.option-input {
+		p {
+			margin-left: .2em;
+			margin-right: .6em;
+		}
+	}
+} // End media 1115px
+
+// grid - m
+@media screen and (max-width: 992px) {
+	.adjust-minus {
+		margin-left: -.2em;
+	}
+	
+	.adjust-plus {
+		margin-left: -.7em;
+	}
+	
+	.option-input {
+		p {
+			margin-left: .8em;
+			margin-right: .8em;
+		}
+	}
+	
+} // End media 992px
+
+@media screen and (max-width: 840px) {
+	.adjust-minus {
+		margin-left: -.8em;
+	}
+	
+	.adjust-plus {
+		margin-left: -.8em;
+	}
+	
+	.option-input {
+		p {
+			margin-left: 0em;
+			margin-right: 1.2em;
+		}
+	}
+
+}
+
+// Small is 600px and less
+
+@media screen and (max-width: 746px) {
+	
+}

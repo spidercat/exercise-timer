@@ -7,6 +7,15 @@ html {
 .hidden {
   display: none; }
 
+#wrapper {
+  display: block;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  max-width: 2000px; }
+
 /* Top Bar
 ===================================*/
 #top-bar {
@@ -77,13 +86,15 @@ html {
 
 #options {
   border-left: 5px solid #212121;
-  display: inline; }
+  display: block;
+  padding-left: 0;
+  padding-right: 0; }
 
 .option-input {
   height: 5em;
   border-top: 5px solid #212121;
-  margin-left: -1.1em;
-  margin-right: -1.5em; }
+  box-sizing: border-box;
+  width: 105.1%; }
   .option-input p {
     display: inline-block;
     margin-left: .8em;
@@ -98,3 +109,36 @@ html {
   .adjust:hover {
     cursor: pointer;
     color: #212121; }
+
+/* Media Queries
+====================================*/
+@media screen and (max-width: 1400px) {
+  .option-input {
+    width: 107%; } }
+
+@media screen and (max-width: 1215px) {
+  .adjust-minus {
+    margin-left: -.4em; }
+  .adjust-plus {
+    margin-left: -.8em; }
+  .option-input p {
+    margin-left: .2em;
+    margin-right: .6em; } }
+
+@media screen and (max-width: 992px) {
+  .adjust-minus {
+    margin-left: -.2em; }
+  .adjust-plus {
+    margin-left: -.7em; }
+  .option-input p {
+    margin-left: .8em;
+    margin-right: .8em; } }
+
+@media screen and (max-width: 840px) {
+  .adjust-minus {
+    margin-left: -.8em; }
+  .adjust-plus {
+    margin-left: -.8em; }
+  .option-input p {
+    margin-left: 0em;
+    margin-right: 1.2em; } }

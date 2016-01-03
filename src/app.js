@@ -1,27 +1,27 @@
 var app = angular.module('tabataApp', []);
 app.controller('tabataAppCtrl', ['$scope', function($scope) {
+		
+		// Set default volume as on
+  	$('#volume-switch').prop('checked', true)	
 
     // Global variables (because I am a terrible person)
     $scope.roundsLeft = 1;
 
     // Count down variables
-    $scope.breakLeft = ['00', ':', '10'];
-    $scope.timeLeft = ['00', ':', '20'];
+    $scope.breakLeft = ['00', ':', '05'];
+    $scope.timeLeft = ['00', ':', '10'];
 
     $scope.breakLeftJoined = $scope.breakLeft.join('');
     $scope.timeLeftJoined = $scope.timeLeft.join('');
 
     // Option variables. Get copied for tempArray.
     $scope.rounds = 8;
-    $scope.timeOff = ['00', ':', '10'];
-    $scope.timeOn = ['00', ':', '20'];
+    $scope.timeOff = ['00', ':', '05'];
+    $scope.timeOn = ['00', ':', '10'];
 
     $scope.timeOnJoined = $scope.timeOn.join('');
     $scope.timeOffJoined = $scope.timeOff.join('');
 	
-		// Set volume as on
-  	$('#volumeSwitch').prop('checked', true)
-
     // Put 0 if digit less than 10
     function minTwoDigits(n) {
       return (n < 10 ? '0' : '') + n;
@@ -107,9 +107,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.breakLeft[2] = minTwoDigits(seconds - 1);
               $scope.breakLeftJoined = $scope.breakLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04) && ($('#volumeSwitch').prop('checked'))) {
+              if ((seconds >= 02) && (seconds <= 04) && ($('#volume-switch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if ((seconds == 01) && ($('#volumeSwitch').prop('checked'))){
+              } else if ((seconds == 01) && ($('#volume-switch').prop('checked'))){
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
             } else if ((seconds == 00) && (minutes != 00)) {
@@ -129,7 +129,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.startClock();
             }
 
-          }, 1000);
+          }, 200);
 
         } else {
           timeLeftInterval = setInterval(function() {
@@ -139,9 +139,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.timeLeft[2] = minTwoDigits(seconds - 1);
               $scope.timeLeftJoined = $scope.timeLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04) && ($('#volumeSwitch').prop('checked'))) {
+              if ((seconds >= 02) && (seconds <= 04) && ($('#volume-switch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if ((seconds == 01) && ($('#volumeSwitch').prop('checked'))) {
+              } else if ((seconds == 01) && ($('#volume-switch').prop('checked'))) {
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
             } else if ((seconds == 00) && (minutes != 00)) {
@@ -150,7 +150,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.timeLeftJoined = $scope.timeLeft.join('');
               $scope.$apply();
             } else {
-              $scope.roundsLeft = $scope.roundsLeft + 1;
+
+							$scope.roundsLeft = $scope.roundsLeft + 1;
+
               $('#breakLeft').toggleClass('hidden');
               $('#timeLeft').toggleClass('hidden');
               $('#time-left').css('background-color', '#ef9a9a');
@@ -164,12 +166,11 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               // Reset break
               $scope.startClock();
             }
-          }, 1000);
+          }, 200);
         }
 
       } else {
-        $('#pause-button').addClass('hidden');
-        $('#start-button').removeClass('hidden');
+					$scope.clear();
       }
     }
 
@@ -192,12 +193,12 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
       $scope.timeLeft = tempArray;
       $scope.timeLeftJoined = $scope.timeOnJoined;
       $scope.$apply;
+			
+			$('#pause-button').addClass('hidden');
+      $('#start-button').removeClass('hidden');
 
       clearInterval(breakLeftInterval);
       clearInterval(timeLeftInterval);
-
-      $('#pause-button').addClass('hidden');
-      $('#start-button').removeClass('hidden');
 
     }
 

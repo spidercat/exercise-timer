@@ -94,7 +94,8 @@ html {
   height: 5em;
   border-top: 5px solid #212121;
   box-sizing: border-box;
-  width: 105.1%; }
+  width: 105.1%;
+  outline: none !important; }
   .option-input p {
     display: inline-block;
     margin-left: .8em;
@@ -105,7 +106,14 @@ html {
   position: absolute;
   margin-top: .6em;
   margin-left: -.5em;
-  color: #f57c00; }
+  color: #f57c00;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+  user-select: none; }
   .adjust:hover {
     cursor: pointer;
     color: #212121; }

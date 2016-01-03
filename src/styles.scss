@@ -46,10 +46,8 @@ html {
 	h3 {
 		padding-top: .1em;
 		font-weight: 500;
-		text-align: center;
-		
+		text-align: center;	
 	}
-	
 	h5 {
 		color: white;
 		background-color: $main-dark;
@@ -111,6 +109,7 @@ html {
 		color: $mute-grey;
 	}
 }
+
 #round-numbers {
 	margin-top: 1.5em;
 	font-weight: 600;
@@ -132,21 +131,25 @@ html {
 	border-top: 5px solid $dark-grey;
 	box-sizing: border-box;
 	width: 105.1%;
+	outline: none!important;
 	p {
 		display: inline-block;
 		margin-left: .8em;
 		margin-right: .8em;
 		width: 4em;
-	}
-	
+	}	
 }
 
-// Add/subtract time icons
 .adjust {
 	position: absolute;
 	margin-top: .6em;
 	margin-left: -.5em;
 	color: #f57c00;
+	// Prevents blue hilight
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	user-select: none;
 	&:hover {
 		cursor: pointer;
 		color: $dark-grey;
@@ -219,6 +222,6 @@ html {
 
 // Small is 600px and less
 
-@media screen and (max-width: 746px) {
+@media screen and (max-width: 747px) {
 	
 }

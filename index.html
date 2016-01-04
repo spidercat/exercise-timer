@@ -33,25 +33,23 @@
 
     <!--End timer control buttons-->
 
-    <!--Timer-->
     <div class="row">
       <div class="col s12 m10 offset-m1 l8 offset-l2 z-depth-2" id="app-wrapper">
-        <!--Parent grid/wrapper-->
-        <div class="row">
-          <!--Clock & 2/8 cycles-->
+     
+          <!--Clock-->
           <div class="col s12 m9 l9" id="timer">
             <div class="row">
-              <div class="col s12 m8 l8" id="time-left">
-                <div id="timeLeft" class="hidden">
+              <div class="col s9 m8 l8" id="current-timer">
+                <div id="time-left" class="hidden">
                   <h3>Time left</h3>
                   <br><span class="time-left-numbers">{{timeLeftJoined}}</span>
                 </div>
-                <div id="breakLeft">
+                <div id="break-left">
                   <h3>Break</h3>
                   <br><span class="time-left-numbers">{{breakLeftJoined}}</span>
                 </div>
               </div>
-              <div class="col s4 m4 l4" id="round">
+              <div class="col s3 m4 l4" id="round">
                 <h4>Round</h4>
                 <br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
               </div>
@@ -59,7 +57,7 @@
           </div>
 
           <!--Options grid-->
-          <div class="col s3 m3 l3" id="options">
+          <div class="col s10 offset-s1 m3 l3" id="options">
             <div class="switch">
               <p>Volume:
                 <p>
@@ -73,25 +71,25 @@
             <div class="option-input">
               <p>Time on:</p>
               <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn('minus')">remove</i>
-              <p>{{timeOnJoined}}</p>
+              <p class="option-time">{{timeOnJoined}}</p>
               <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn('plus')">add</i>
             </div>
             <div class="option-input">
               <p>Time off:</p>
               <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff('minus')">remove</i>
-              <p>{{timeOffJoined}}</p>
+              <p class="option-time">{{timeOffJoined}}</p>
               <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff('plus')">add</i>
             </div>
             <div class="option-input">
               <p>Rounds:</p>
               <i class="material-icons adjust adjust-minus" ng-click="changeRounds('minus')">remove</i>
-              <p>{{rounds}}</p>
+              <p class="option-time">{{rounds}}</p>
               <i class="material-icons adjust adjust-plus" ng-click="changeRounds('plus')">add</i>
             </div>
           </div>
-        </div>
         <!--End timer-->
       </div>
+					
     </div>
 
 

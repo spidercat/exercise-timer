@@ -99,7 +99,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
       $('#start-button').addClass('hidden');
       if ($scope.roundsLeft <= $scope.rounds) {
 
-        if ($('#timeLeft').hasClass('hidden')) {
+        if ($('#time-left').hasClass('hidden')) {
           breakLeftInterval = setInterval(function() {
             var minutes = parseInt($scope.breakLeft[0]);
             var seconds = parseInt($scope.breakLeft[2]);
@@ -118,9 +118,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.breakLeftJoined = $scope.breakLeft.join('');
               $scope.$apply();
             } else {
-              $('#timeLeft').toggleClass('hidden');
-              $('#breakLeft').toggleClass('hidden');
-              $('#time-left').css('background-color', '#a5d6a7');
+              $('#time-left').toggleClass('hidden');
+              $('#break-left').toggleClass('hidden');
+              $('#current-timer').css('background-color', '#a5d6a7');
               var tempArray = $scope.timeOff.slice();
               $scope.breakLeft = tempArray;
               $scope.breakLeftJoined = $scope.timeOffJoined;
@@ -153,9 +153,9 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 
 							$scope.roundsLeft = $scope.roundsLeft + 1;
 
-              $('#breakLeft').toggleClass('hidden');
-              $('#timeLeft').toggleClass('hidden');
-              $('#time-left').css('background-color', '#ef9a9a');
+              $('#break-left').toggleClass('hidden');
+              $('#time-left').toggleClass('hidden');
+              $('#current-timer').css('background-color', '#ef9a9a');
               // To hold copied array. Because apparently, assigning an array as a value
               // creates a pointer. What the hell, JavaScript? Yes, this took me a day to solve.
               var tempArray = $scope.timeOn.slice();

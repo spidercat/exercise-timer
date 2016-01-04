@@ -199,7 +199,7 @@ html {
 		}
 	}
 	
-} // End media 992px
+} // End media 992px (grid -m)
 
 @media screen and (max-width: 840px) {
 	.adjust-minus, .adjust-plus {
@@ -213,7 +213,7 @@ html {
 		}
 	}
 
-}
+} // End media 840px
 
 
 @media screen and (max-width: 747px) {
@@ -236,7 +236,7 @@ html {
 		margin-top: -.8em;
 	}
 
-}
+} // End media 747px
 
 // grid -s
 @media screen and (max-width: 600px) {
@@ -268,7 +268,6 @@ html {
 	}
 	
 	#options {
-		//border-left: none;
 		border: 5px solid $dark-grey;
 	}
 	
@@ -294,13 +293,52 @@ html {
 	}
 	
 	.adjust-minus {
-		margin-left: -1.9em;
-		margin-top: .2em;
+		margin-left: -2.5em;
 	}
 	
 	.adjust-plus {
-		margin-left: 1em;
-		margin-top: -.8em;
+		margin-left: .9em;
 	}
 	
-}
+} // End media 600px (grid -s)
+
+@media screen and (max-width: 500px) {
+	#round {
+		h4 {
+			margin-top: .6em;
+			font-size: 1.8em;
+			margin-bottom: .5em;
+		}
+	}
+
+	#round-numbers {
+		font-size: 2.5em;
+	}
+	
+	#current-timer {
+		h3 {
+			margin-top: .1em;
+			margin-bottom: -.2em;
+		}
+	}
+
+	.time-left-numbers {
+		font-size: 3.5em;
+	}	
+	
+} // End media 500px
+
+@media screen and (max-width: 370px) {
+	#wrapper {
+		margin-left: .3em;
+		margin-right: .3em;
+	}
+	
+	#round {
+		h4 {
+			font-size: 1.6em;
+			margin-bottom: .5em;
+		}
+	}
+
+} // End media 370px

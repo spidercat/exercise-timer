@@ -4,6 +4,8 @@ $red: #f44336; //red
 $green: #66bb6a; //green lighten-1
 $main: #00bcd4; 
 $main-dark: #00acc1;
+$button-color: #ff9800; //orange
+$button-color-dark: #f57c00; // orange darken-2
 
 @mixin border {
 	border: 5px solid $dark-grey;
@@ -13,7 +15,6 @@ $main-dark: #00acc1;
 	display: block;
 	left: 0;
 	right: 0;
-	text-align: center;
 }
 
 
@@ -30,9 +31,10 @@ html {
 
 #wrapper {
 	@include center-el;
-	margin-left: 0 auto;
-	margin-right: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
 	max-width: 2000px;
+	min-height: 34em;
 }
 
 
@@ -58,8 +60,6 @@ html {
 }
 
 
-
-
 /* Main app
 ====================================*/
 
@@ -68,6 +68,7 @@ html {
 	@include center-el;
 	height: 21.5em;
 	background-color: white;
+	text-align: center;
 }
 
 // Buttons
@@ -75,6 +76,7 @@ html {
 	@include center-el;
 	margin-top: 3em;
 	margin-bottom: .5em;
+	text-align: center;
 }
 
 // Time left and rounds left
@@ -156,6 +158,58 @@ html {
 }
 
 
+/* Footer
+====================================*/
+footer {
+	background-color: $main;
+	color: white;
+}
+
+.fa {
+	color: $button-color;
+	font-size: 2em;
+	display: inline;
+	margin-left: .5em;
+	&:hover {
+		color: $button-color-dark;
+	}
+}
+
+
+#lower-footer {
+	background-color: $main-dark;
+	height: 4em;
+	p {
+		display: inline;
+		font-size: 1.2em;
+		margin-left: 2em;
+		color: $dark-grey;
+	}
+	p>a {
+		color: $button-color;
+		font-weight: 600;
+		margin-left: .3em;
+	}
+	p>a:hover {
+		color: $button-color-dark;
+	}	
+}
+
+#about-tabata {
+	max-width: 38em;
+	margin-left: 3em;
+}
+
+#about-developer {
+	max-width: 38em;
+	float: right;
+	padding-right: 1em;	
+}
+
+
+
+
+
 /* Media Queries
 ====================================*/
 @media screen and (max-width: 1400px) {
@@ -180,6 +234,18 @@ html {
 			margin-right: .6em;
 		}
 	}
+	
+	#about-tabata {
+		max-width: 32em;
+		margin-left: 3em;
+	}
+
+	#about-developer {
+		max-width: 32em;
+		float: right;
+		padding-right: 1em;	
+	}
+	
 } // End media 1115px
 
 // grid - m
@@ -199,11 +265,34 @@ html {
 		}
 	}
 	
+	#about-tabata {
+		width: 30em;
+		margin-left: 2em;
+	}
+	
 } // End media 992px (grid -m)
 
+@media screen and (max-width: 915px) {
+	#about-tabata {
+		max-width: 27em;
+		margin-left: 2em;
+	}
+
+	#about-developer {
+		max-width: 27em;
+		float: right;
+		padding-right: 1em;	
+	}
+	
+} // End media 915px
+
 @media screen and (max-width: 840px) {
-	.adjust-minus, .adjust-plus {
-		margin-left: -.8em;
+	.adjust-minus{
+		margin-left: -.6em;
+	}
+	
+	.adjust-plus {
+		margin-left: -1.1em;
 	}
 	
 	.option-input {
@@ -212,11 +301,21 @@ html {
 			margin-right: 1.2em;
 		}
 	}
+	
+	#about-tabata {
+		max-width: 25em;
+		margin-left: 1em;
+	}
+
+	#about-developer {
+		max-width: 25em;
+		float: right;
+		padding-right: .5em;	
+	}
 
 } // End media 840px
 
-
-@media screen and (max-width: 747px) {
+@media screen and (max-width: 765px) {
 	.option-input {
 		p {
 			display: block;
@@ -234,6 +333,23 @@ html {
 	.adjust-plus {
 		margin-left: 1em;
 		margin-top: -.8em;
+	}
+	
+	
+} // End media 764px
+
+
+@media screen and (max-width: 747px) {
+
+	#about-tabata {
+		width: 23em;
+		margin-left: .4em;
+	}
+	
+	#about-developer {
+		max-width: 23em;
+		float: right;
+		padding-right: .5em;	
 	}
 
 } // End media 747px

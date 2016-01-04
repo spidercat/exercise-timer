@@ -8,19 +8,23 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
     $scope.roundsLeft = 1;
 
     // Count down variables
-    $scope.breakLeft = ['00', ':', '05'];
-    $scope.timeLeft = ['00', ':', '10'];
+    $scope.breakLeft = ['00', ':', '10'];
+    $scope.timeLeft = ['00', ':', '20'];
 
     $scope.breakLeftJoined = $scope.breakLeft.join('');
     $scope.timeLeftJoined = $scope.timeLeft.join('');
 
     // Option variables. Get copied for tempArray.
     $scope.rounds = 8;
-    $scope.timeOff = ['00', ':', '05'];
-    $scope.timeOn = ['00', ':', '10'];
+    $scope.timeOff = ['00', ':', '10'];
+    $scope.timeOn = ['00', ':', '20'];
 
     $scope.timeOnJoined = $scope.timeOn.join('');
     $scope.timeOffJoined = $scope.timeOff.join('');
+	
+		// If interval running (to clear correct interval)
+		var breakInterval = false;
+		var timeInterval = false;
 	
     // Put 0 if digit less than 10
     function minTwoDigits(n) {
@@ -101,6 +105,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 
         if ($('#time-left').hasClass('hidden')) {
           breakLeftInterval = setInterval(function() {
+						breakInterval = true;
             var minutes = parseInt($scope.breakLeft[0]);
             var seconds = parseInt($scope.breakLeft[2]);
             if (seconds != 00) {
@@ -126,13 +131,15 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $scope.breakLeftJoined = $scope.timeOffJoined;
               $scope.$apply;
               clearInterval(breakLeftInterval);
+							breakInterval = false;
               $scope.startClock();
             }
 
-          }, 200);
+          }, 1000);
 
         } else {
           timeLeftInterval = setInterval(function() {
+						timeInterval = true;
             var seconds = parseInt($scope.timeLeft[2]);
             var minutes = parseInt($scope.timeLeft[0]);
             if (seconds != 00) {
@@ -156,28 +163,37 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
               $('#break-left').toggleClass('hidden');
               $('#time-left').toggleClass('hidden');
               $('#current-timer').css('background-color', '#ef9a9a');
-              // To hold copied array. Because apparently, assigning an array as a value
-              // creates a pointer. What the hell, JavaScript? Yes, this took me a day to solve.
               var tempArray = $scope.timeOn.slice();
               $scope.timeLeft = tempArray;
               $scope.timeLeftJoined = $scope.timeOnJoined;
               $scope.$apply;
               clearInterval(timeLeftInterval);
+							timeInterval = false;
               // Reset break
               $scope.startClock();
             }
-          }, 200);
+          }, 1000);
         }
 
       } else {
 					$scope.clear();
       }
     }
+		
+		// Clear correct interval
+		function clearActiveInterval() {
+			if (timeInterval) {
+				clearInterval(timeLeftInterval);
+				timeInterval = false;
+			} else if (breakInterval) {
+				clearInterval(breakLeftInterval);
+				breakInterval = false;
+			}
+		}
 
     // Pause timer
     $scope.pauseClock = function() {
-      clearInterval(breakLeftInterval);
-      clearInterval(timeLeftInterval);
+			clearActiveInterval()
       $('#pause-button').addClass('hidden');
       $('#start-button').removeClass('hidden');
     }
@@ -196,10 +212,7 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 			
 			$('#pause-button').addClass('hidden');
       $('#start-button').removeClass('hidden');
-
-      clearInterval(breakLeftInterval);
-      clearInterval(timeLeftInterval);
-
+			clearActiveInterval();
     }
 
   }]) // End controller

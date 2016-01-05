@@ -212,6 +212,21 @@ footer {
 
 /* Media Queries
 ====================================*/
+@media screen and (min-width: 1600px) {
+	#about-tabata {
+	margin-left: 11em;
+}
+
+#about-developer {
+	max-width: 38em;
+	padding-right: 1em;
+	margin-right: 7em;
+}
+
+	
+}
+
+
 @media screen and (max-width: 1400px) {
 	.option-input {
 		width: 107%;
@@ -347,18 +362,32 @@ footer {
 	}
 	
 	#about-developer {
-		max-width: 23em;
-		float: right;
+		width: 23em;
 		padding-right: .5em;	
 	}
 
 } // End media 747px
 
+
+@media screen and (max-width: 670px) {
+	#about-tabata {
+		width: 20em;
+		margin-left: .2em;
+	}
+	
+	#about-developer {
+		width: 20em;
+		padding-right: .2em;	
+	}
+	
+}
+
+
+
 // grid -s
 @media screen and (max-width: 600px) {
-	#wrapper {
-		margin-left: 2em;
-		margin-right: 2em;
+	footer {
+		margin-top: 24em;
 	}
 	
 	#current-timer {
@@ -371,6 +400,7 @@ footer {
 	}
 	
 	#app-wrapper {
+		@include center-el;
 		height: 12.7em;
 		background-color: white;
 	}
@@ -416,6 +446,29 @@ footer {
 		margin-left: .9em;
 	}
 	
+	#about-tabata, #about-developer {
+		@include center-el;
+		position: relative;
+		width: 30em;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0;
+		float: none;
+		h4 {
+		padding-top: .5em;
+		margin-bottom: -1em;	
+		}
+	}
+	
+	#top-bar {
+		h5 {
+			font-size: 1.3em;
+			padding-left: .3em;
+			padding-right: .3em;
+		}
+	}
+	
+
 } // End media 600px (grid -s)
 
 @media screen and (max-width: 500px) {
@@ -440,16 +493,45 @@ footer {
 
 	.time-left-numbers {
 		font-size: 3.5em;
-	}	
+	}
+	
+	#lower-footer {
+		height: 4em;
+		p {
+			font-size: 1em;
+			margin-left: .7em;
+		}
+		p>a {
+			font-weight: 600;
+			margin-left: .3em;
+		}
+	}
 	
 } // End media 500px
 
-@media screen and (max-width: 370px) {
-	#wrapper {
-		margin-left: .3em;
-		margin-right: .3em;
+@media screen and (max-width: 410px) {
+	#about-tabata, #about-developer {
+		width: 22em;
+		padding-left: .3em;
+		padding-right: .3em;
 	}
 	
+	#lower-footer {
+		height: 6em;
+		p {
+			font-size: 1em;
+			margin-left: .7em;
+			display: block;
+		}
+		p>a {
+			font-weight: 600;
+			margin-left: .3em;
+		}
+	}
+	
+}
+
+@media screen and (max-width: 370px) {
 	#round {
 		h4 {
 			font-size: 1.6em;
@@ -458,3 +540,10 @@ footer {
 	}
 
 } // End media 370px
+
+@media screen and (max-width: 350px) {
+	#about-tabata, #about-developer {
+		width: 18em;
+	}
+	
+} // End media 350px

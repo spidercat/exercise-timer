@@ -13,16 +13,16 @@
 
 <body ng-app="tabataApp">
 
-  
 
-	
-	<div id="wrapper" ng-controller="tabataAppCtrl">
-		<!--Title bar -->
-		<div id="top-bar">
-			<h3>Interval Timer</h3>
-			<br>
-			<h5 class="z-depth-2">Preset for a Tabata workout, but adjust for any intervals!</h5>
-		</div>
+
+
+  <div id="wrapper" ng-controller="tabataAppCtrl">
+    <!--Title bar -->
+    <div id="top-bar">
+      <h3>Interval Timer</h3>
+      <br>
+      <h5 class="z-depth-2">Preset for a Tabata workout, but adjust for any intervals!</h5>
+    </div>
 
     <!--Timer control buttons-->
     <div id="button-wrapper">
@@ -35,89 +35,97 @@
 
     <div class="row">
       <div class="col s12 m10 offset-m1 l8 offset-l2 z-depth-2" id="app-wrapper">
-     
-          <!--Clock-->
-          <div class="col s12 m9 l9" id="timer">
-            <div class="row">
-              <div class="col s9 m8 l8" id="current-timer">
-                <div id="time-left" class="hidden">
-                  <h3>Time left</h3>
-                  <br><span class="time-left-numbers">{{timeLeftJoined}}</span>
-                </div>
-                <div id="break-left">
-                  <h3>Break</h3>
-                  <br><span class="time-left-numbers">{{breakLeftJoined}}</span>
-                </div>
-              </div>
-              <div class="col s3 m4 l4" id="round">
-                <h4>Round</h4>
-                <br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
-              </div>
-            </div>
-          </div>
 
-          <!--Options grid-->
-          <div class="col s10 offset-s1 m3 l3" id="options">
-            <div class="switch">
-              <p>Volume:
-                <p>
-                  <label>
-                    Off
-                    <input type="checkbox" id="volume-switch">
-                    <span class="lever"></span>
-                    On
-                  </label>
+        <!--Clock-->
+        <div class="col s12 m9 l9" id="timer">
+          <div class="row">
+            <div class="col s9 m8 l8" id="current-timer">
+              <div id="time-left" class="hidden">
+                <h3>Time left</h3>
+                <br><span class="time-left-numbers">{{timeLeftJoined}}</span>
+              </div>
+              <div id="break-left">
+                <h3>Break</h3>
+                <br><span class="time-left-numbers">{{breakLeftJoined}}</span>
+              </div>
             </div>
-            <div class="option-input">
-              <p>Time on:</p>
-              <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn('minus')">remove</i>
-              <p class="option-time">{{timeOnJoined}}</p>
-              <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn('plus')">add</i>
-            </div>
-            <div class="option-input">
-              <p>Time off:</p>
-              <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff('minus')">remove</i>
-              <p class="option-time">{{timeOffJoined}}</p>
-              <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff('plus')">add</i>
-            </div>
-            <div class="option-input">
-              <p>Rounds:</p>
-              <i class="material-icons adjust adjust-minus" ng-click="changeRounds('minus')">remove</i>
-              <p class="option-time">{{rounds}}</p>
-              <i class="material-icons adjust adjust-plus" ng-click="changeRounds('plus')">add</i>
+            <div class="col s3 m4 l4" id="round">
+              <h4>Round</h4>
+              <br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
             </div>
           </div>
+        </div>
+
+        <!--Options grid-->
+        <div class="col s10 offset-s1 m3 l3" id="options">
+          <div class="switch">
+            <p>Volume:
+              <p>
+                <label>
+                  Off
+                  <input type="checkbox" id="volume-switch">
+                  <span class="lever"></span>
+                  On
+                </label>
+          </div>
+          <div class="option-input">
+            <p>Time on:</p>
+            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn('minus')">remove</i>
+            <p class="option-time">{{timeOnJoined}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn('plus')">add</i>
+          </div>
+          <div class="option-input">
+            <p>Time off:</p>
+            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff('minus')">remove</i>
+            <p class="option-time">{{timeOffJoined}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff('plus')">add</i>
+          </div>
+          <div class="option-input">
+            <p>Rounds:</p>
+            <i class="material-icons adjust adjust-minus" ng-click="changeRounds('minus')">remove</i>
+            <p class="option-time">{{rounds}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeRounds('plus')">add</i>
+          </div>
+        </div>
         <!--End timer-->
       </div>
-					
+
     </div>
-		
-		<!--Footer-->
-		<footer>
-			<div class="row">
-				<!--Tabata info -->
-				<div class="col s6 l8" id="about-tabata">
-					<h4>What is tabata?</h4><br>
-					<p>Tabata is a type of HIIT (High Intensity Interval Training) workout. The 4 minute workout consists of a 10 second rest period and 20 seconds of exercise, repeated 8 times.
-					Tabata workouts are a short, intense way to improve both your cardio and strength.</p>
-				</div>
 
-				<!-- Me info-->
-				<div class="col s6 l8" id="about-developer">
-					<h4>About</h4><br>
-					<p>Hey there!<br> I'm a former personal trainer and fitness instructor, now a developer. I couldn't find a web app timer with the functionality I wanted, so I made one. <br>Hope you find this useful!</p><Br>
-					<a href="https://twitter.com/share" class="twitter-share-button"{count} data-text="Check out this tabata interval timer!" data-via="LauraNKyle" data-size="large">Tweet</a>
-				</div>
-			</div>
+    <!--Footer-->
+    <footer>
+      <div class="row">
+        <!--Tabata info -->
+        <div class="col s6 l8" id="about-tabata">
+          <h4>What is tabata?</h4>
+          <br>
+          <p>Tabata is a type of HIIT (High Intensity Interval Training) workout. The 4 minute workout consists of a 10 second rest period and 20 seconds of exercise, repeated 8 times. Tabata workouts are a short, intense way to improve both your cardio
+            and strength.</p>
+        </div>
 
-			<div id="lower-footer">
-				<p>Created by: <a href="http://laura-nk.com/" target="_blank">laura-nk.com</a></p>
-				<p>Find me on Twitter:<a href="https://twitter.com/LauraNKyle" target="_blank"><i class="fa fa-twitter"></i></a></p>
-			</div>
+        <!-- Me info-->
+        <div class="col s6 l8" id="about-developer">
+          <h4>About</h4>
+          <br>
+          <p>Hey there!
+            <br>I'm a former personal trainer and fitness instructor, now a developer. I couldn't find a web app timer with the functionality I wanted, so I made one.
+            <br>Hope you find this useful!</p>
+          <Br>
+          <a href="https://twitter.com/share" class="twitter-share-button" {count} data-text="Check out this tabata interval timer!" data-via="LauraNKyle" data-size="large">Tweet</a>
+        </div>
+      </div>
+
+      <div id="lower-footer">
+        <p>Created by: <a href="http://laura-nk.com/" target="_blank">laura-nk.com</a>
+        </p>
+        <p>Find me on Twitter:<a href="https://twitter.com/LauraNKyle" target="_blank"><i class="fa fa-twitter"></i></a>
+        </p>
+      </div>
 
 
-  </div> <!--End wrapper-->
-	
+  </div>
+  <!--End wrapper-->
+
 
 
   </footer>
@@ -128,7 +136,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="src/app.js"></script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  </script>
   <script src="dist/buzz/buzz.min.js"></script>
 </body>
 

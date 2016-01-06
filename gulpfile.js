@@ -3,13 +3,13 @@ var sass = require('gulp-sass');
 var prettify = require('gulp-html-prettify');
 
 gulp.task('styles', function () {
-  gulp.src('./src/styles.scss')
+  gulp.src('./src/*.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('default', function () {
-  gulp.watch('./src/styles.scss', ['styles']);
+  gulp.watch('./src/*.scss', ['styles']);
 });
 
 gulp.task('templates', function () {

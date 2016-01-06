@@ -1,11 +1,12 @@
 $dark-grey: #212121; //grey darken-4
-$mute-grey: #424242;
+$mute-grey: #111111;
 $red: #f44336; //red
 $green: #66bb6a; //green lighten-1
-$main: #00bcd4; 
-$main-dark: #00acc1;
+$main: #323232; 
+$main-dark: #212121;
 $button-color: #ff9800; //orange
 $button-color-dark: #f57c00; // orange darken-2
+$blue: #00acc1;
 
 @mixin border {
 	border: 5px solid $dark-grey;
@@ -22,7 +23,7 @@ $button-color-dark: #f57c00; // orange darken-2
 ===================================*/
 html {
 	color: $dark-grey;
-	background-color: #fdfdfd;
+	background-color: #111111;
 }
 
 .hidden {
@@ -44,7 +45,7 @@ html {
 #top-bar {
 	background-color: $main;
 	margin-top: -1.5em;
-	color: $dark-grey;
+	color: $blue;
 	h3 {
 		padding-top: .1em;
 		font-weight: 500;
@@ -67,7 +68,7 @@ html {
 	@include border;
 	@include center-el;
 	height: 21.5em;
-	background-color: white;
+	background-color: #d1d1d1;
 	text-align: center;
 }
 
@@ -181,9 +182,9 @@ footer {
 	height: 4em;
 	p {
 		display: inline;
-		font-size: 1.2em;
+		font-size: 1.1em;
 		margin-left: 2em;
-		color: $dark-grey;
+		color: white;
 	}
 	p>a {
 		color: $button-color;
@@ -193,6 +194,12 @@ footer {
 	p>a:hover {
 		color: $button-color-dark;
 	}	
+}
+
+#about-tabata, #about-developer {
+	h4 {
+		color: $blue;
+	}
 }
 
 #about-tabata {
@@ -214,11 +221,12 @@ footer {
 	margin-left: 11em;
 }
 
-	#about-developer {
-		max-width: 38em;
-		padding-right: 1em;
-		margin-right: 7em;
-	}
+#about-developer {
+	max-width: 38em;
+	padding-right: 1em;
+	margin-right: 7em;
+}
+
 	
 }
 
@@ -414,6 +422,7 @@ footer {
 	}
 	
 	.option-input {
+		color: white;
 		width: 100%;
 		height: 4.5em;
 		p {
@@ -429,6 +438,7 @@ footer {
 	.switch {
 		height: 4.5em;
 		font-weight: 500;
+		color: white;
 		p {
 			margin-top: .2em;
 		}
@@ -523,8 +533,7 @@ footer {
 			font-weight: 600;
 			margin-left: .3em;
 		}
-	}
-	
+	}	
 }
 
 @media screen and (max-width: 370px) {

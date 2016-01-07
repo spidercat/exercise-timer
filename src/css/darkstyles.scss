@@ -60,6 +60,18 @@ html {
 	}
 }
 
+#css-switch {
+	position: absolute;
+	font-weight: 700;
+	margin-left: 90%;
+	margin-top: -2.6em;
+	a {
+		color: #00695c;
+	}
+	a:hover {
+		color: #00897b;	
+	}
+}
 
 /* Main app
 ====================================*/
@@ -331,6 +343,10 @@ footer {
 		float: right;
 		padding-right: .5em;	
 	}
+	
+	#css-switch {
+		margin-left: 80%;	
+	}
 
 } // End media 840px
 
@@ -513,6 +529,17 @@ footer {
 		}
 	}
 	
+	#css-switch {
+		margin-left: 79%;
+	}
+	
+	#top-bar {
+		h3 {
+			padding-top: .5em;
+			font-size: 2.5em;
+		}
+	}
+	
 } // End media 500px
 
 @media screen and (max-width: 410px) {
@@ -534,7 +561,16 @@ footer {
 			margin-left: .3em;
 		}
 	}	
-}
+	
+	#css-switch {
+		position: relative;
+		display: block;
+		text-align: center;
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: -1em;
+	}
+} // End media 410px
 
 @media screen and (max-width: 370px) {
 	#round {

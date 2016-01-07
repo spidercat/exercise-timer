@@ -2,7 +2,7 @@
 ===================================*/
 html {
   color: #212121;
-  background-color: #fdfdfd; }
+  background-color: #111111; }
 
 .hidden {
   display: none; }
@@ -19,19 +19,29 @@ html {
 /* Top Bar
 ===================================*/
 #top-bar {
-  background-color: #00bcd4;
+  background-color: #323232;
   margin-top: -1.5em;
-  color: #212121; }
+  color: #00acc1; }
   #top-bar h3 {
     padding-top: .1em;
     font-weight: 500;
     text-align: center; }
   #top-bar h5 {
     color: white;
-    background-color: #00acc1;
+    background-color: #212121;
     text-align: center;
     margin-top: -1.3em;
     padding-bottom: .2em; }
+
+#css-switch {
+  position: absolute;
+  font-weight: 700;
+  margin-left: 90%;
+  margin-top: -2.6em; }
+  #css-switch a {
+    color: #00695c; }
+  #css-switch a:hover {
+    color: #00897b; }
 
 /* Main app
 ====================================*/
@@ -41,7 +51,7 @@ html {
   left: 0;
   right: 0;
   height: 21.5em;
-  background-color: white;
+  background-color: #d1d1d1;
   text-align: center; }
 
 #button-wrapper {
@@ -63,7 +73,7 @@ html {
   background-color: #ef9a9a; }
   #current-timer h3 {
     font-weight: 500;
-    color: #424242;
+    color: #111111;
     margin-top: .2em;
     margin-bottom: .3em; }
 
@@ -76,13 +86,13 @@ html {
   height: 20.85em; }
   #round h4 {
     font-weight: 500;
-    color: #424242; }
+    color: #111111; }
 
 #round-numbers {
   margin-top: 1.5em;
   font-weight: 600;
   font-size: 5em;
-  color: #00acc1; }
+  color: #212121; }
 
 #options {
   border-left: 5px solid #212121;
@@ -120,7 +130,7 @@ html {
 /* Footer
 ====================================*/
 footer {
-  background-color: #00bcd4;
+  background-color: #323232;
   color: white; }
 
 .fa {
@@ -132,19 +142,22 @@ footer {
     color: #f57c00; }
 
 #lower-footer {
-  background-color: #00acc1;
+  background-color: #212121;
   height: 4em; }
   #lower-footer p {
     display: inline;
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-left: 2em;
-    color: #212121; }
+    color: white; }
   #lower-footer p > a {
     color: #ff9800;
     font-weight: 600;
     margin-left: .3em; }
   #lower-footer p > a:hover {
     color: #f57c00; }
+
+#about-tabata h4, #about-developer h4 {
+  color: #00acc1; }
 
 #about-tabata {
   max-width: 38em;
@@ -220,7 +233,9 @@ footer {
   #about-developer {
     max-width: 25em;
     float: right;
-    padding-right: .5em; } }
+    padding-right: .5em; }
+  #css-switch {
+    margin-left: 80%; } }
 
 @media screen and (max-width: 765px) {
   .option-input p {
@@ -275,6 +290,7 @@ footer {
   #options {
     border: 5px solid #212121; }
   .option-input {
+    color: white;
     width: 100%;
     height: 4.5em; }
     .option-input p {
@@ -286,7 +302,8 @@ footer {
       margin-bottom: -.1em; }
   .switch {
     height: 4.5em;
-    font-weight: 500; }
+    font-weight: 500;
+    color: white; }
     .switch p {
       margin-top: .2em; }
   .adjust-minus {
@@ -330,7 +347,12 @@ footer {
       margin-left: .7em; }
     #lower-footer p > a {
       font-weight: 600;
-      margin-left: .3em; } }
+      margin-left: .3em; }
+  #css-switch {
+    margin-left: 79%; }
+  #top-bar h3 {
+    padding-top: .5em;
+    font-size: 2.5em; } }
 
 @media screen and (max-width: 410px) {
   #about-tabata, #about-developer {
@@ -345,7 +367,14 @@ footer {
       display: block; }
     #lower-footer p > a {
       font-weight: 600;
-      margin-left: .3em; } }
+      margin-left: .3em; }
+  #css-switch {
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: -1em; } }
 
 @media screen and (max-width: 370px) {
   #round h4 {

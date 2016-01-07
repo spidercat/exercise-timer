@@ -2,15 +2,17 @@
 <html>
 
 <head>
+	<!-- Want to see the unminified code?
+	https://github.com/LauraNK/exercise-timer   -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="og:image" content="http://tabataintervaltimer.com/dist/img/screencap.jpg">
   <title>Tabata Interval Timer</title>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link type="text/css" rel="stylesheet" href="dist/styles.css" title="default-theme">
+  <link type="text/css" rel="stylesheet" href="dist/css/styles.css" title="default">
+	<link type="text/css" rel="alternate stylesheet" href="dist/css/darkstyles.css" title="dark-theme">
   <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
-
 </head>
 
 <body ng-app="tabataApp">
@@ -22,6 +24,7 @@
     <!--Title bar -->
     <div id="top-bar">
       <h3>Interval Timer</h3>
+			<p id="css-switch"><a href="#" id="default-theme">Light</a> <span>|</span> <a href="#" id="dark-theme">Dark</a></p>
       <br>
       <h5 class="z-depth-2">Preset for a Tabata workout, but adjust for any intervals!</h5>
     </div>
@@ -129,14 +132,11 @@
   <!--End wrapper-->
 
 
-
-
-
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-  <script type="text/javascript" src="dist/app.js"></script>
-	<script type="text/javascript" src="dist/styleswitcher.js"></script>
+  <script type="text/javascript" src="dist/js/app.js"></script>
+	<script type="text/javascript" src="dist/js/styleswitcher.js"></script>
   <script>
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   </script>

@@ -2,32 +2,47 @@
 <html>
 
 <head>
-	<!-- Want to see the unminified code?
+  <!-- Want to see the unminified code?
 	https://github.com/LauraNK/exercise-timer   -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta property="og:image" content="http://tabataintervaltimer.com/dist/img/screencap.jpg">
+  <meta property="og:image" content="http://tabataintervaltimer.com/dist/img/screencap.jpg">
   <title>Tabata Interval Timer</title>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link type="text/css" rel="stylesheet" href="dist/css/styles.css" title="default">
-	<link type="text/css" rel="alternate stylesheet" href="dist/css/darkstyles.css" title="dark-theme">
+  <link type="text/css" rel="alternate stylesheet" href="dist/css/darkstyles.css" title="dark-theme">
   <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
+
 </head>
 
 <body ng-app="tabataApp">
 
-
-
+  <!--
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	 Tabata google ad 
+	<ins class="adsbygoogle"
+			 style="display:block"
+			 data-ad-client="ca-pub-7138549700254021"
+			 data-ad-slot="9092086396"
+			 data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+-->
 
   <div id="wrapper" ng-controller="tabataAppCtrl">
+
     <!--Title bar -->
     <div id="top-bar">
       <h3>Interval Timer</h3>
-			<p id="css-switch"><a href="#" id="default-theme">Light</a> <span>|</span> <a href="#" id="dark-theme">Dark</a></p>
+      <p id="css-switch"><a href="#" id="default-theme">Light</a>  <span>|</span>  <a href="#" id="dark-theme">Dark</a>
+      </p>
       <br>
       <h5 class="z-depth-2">Preset for a Tabata workout, but adjust for any intervals!</h5>
     </div>
+    <!--End title bar-->
+
 
     <!--Timer control buttons-->
     <div id="button-wrapper">
@@ -35,31 +50,31 @@
       <a class="waves-effect waves-light btn pink orange darken-2 hidden" id="pause-button" ng-click="pauseClock()"><i class="material-icons left">pause</i>Pause</a>
       <a class="waves-effect waves-light btn orange" ng-click="clear()"><i class="material-icons left">stop</i>Clear</a>
     </div>
-
     <!--End timer control buttons-->
+
 
     <div class="row">
       <div class="col s12 m10 offset-m1 l8 offset-l2 z-depth-2" id="app-wrapper">
-
         <!--Clock-->
         <div class="col s12 m9 l9" id="timer">
           <div class="row">
             <div class="col s9 m8 l8" id="current-timer">
               <div id="time-left" class="hidden">
                 <h3>Time left</h3>
-                <br><span class="time-left-numbers">{{timeLeftJoined}}</span>
+                <br><span class="time-left-numbers">{{countJoinedOb.timeLeftJoined}}</span>
               </div>
               <div id="break-left">
                 <h3>Break</h3>
-                <br><span class="time-left-numbers">{{breakLeftJoined}}</span>
+                <br><span class="time-left-numbers">{{countJoinedOb.breakLeftJoined}}</span>
               </div>
             </div>
             <div class="col s3 m4 l4" id="round">
               <h4>Round</h4>
-              <br><span id="round-numbers">{{roundsLeft}}/{{rounds}}</span>
+              <br><span id="round-numbers">{{roundsOb.roundsLeft}}/{{roundsOb.rounds}}</span>
             </div>
           </div>
         </div>
+        <!--End clock-->
 
         <!--Options grid-->
         <div class="col s10 offset-s1 m3 l3" id="options">
@@ -76,23 +91,22 @@
           <div class="option-input">
             <p>Time on:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn('minus')">remove</i>
-            <p class="option-time">{{timeOnJoined}}</p>
+            <p class="option-time">{{optionJoinedOb.timeOnJoined}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn('plus')">add</i>
           </div>
           <div class="option-input">
             <p>Time off:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff('minus')">remove</i>
-            <p class="option-time">{{timeOffJoined}}</p>
+            <p class="option-time">{{optionJoinedOb.timeOffJoined}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff('plus')">add</i>
           </div>
           <div class="option-input">
             <p>Rounds:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeRounds('minus')">remove</i>
-            <p class="option-time">{{rounds}}</p>
+            <p class="option-time">{{roundsOb.rounds}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeRounds('plus')">add</i>
           </div>
         </div>
-        <!--End timer-->
       </div>
 
     </div>
@@ -136,7 +150,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="dist/js/app.js"></script>
-	<script type="text/javascript" src="dist/js/styleswitcher.js"></script>
+  <script type="text/javascript" src="dist/js/styleswitcher.js"></script>
   <script>
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   </script>

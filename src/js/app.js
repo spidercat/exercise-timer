@@ -4,27 +4,38 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 		// Set default volume as on
   	$('#volume-switch').prop('checked', true)	
 
-    // Global variables (because I am a terrible person)
-    $scope.roundsLeft = 1;
-
-    // Count down variables
-    $scope.breakLeft = ['00', ':', '10'];
-    $scope.timeLeft = ['00', ':', '20'];
-
-    $scope.breakLeftJoined = $scope.breakLeft.join('');
-    $scope.timeLeftJoined = $scope.timeLeft.join('');
-
-    // Option variables. Get copied for tempArray.
-    $scope.rounds = 8;
-    $scope.timeOff = ['00', ':', '10'];
-    $scope.timeOn = ['00', ':', '20'];
-
-    $scope.timeOnJoined = $scope.timeOn.join('');
-    $scope.timeOffJoined = $scope.timeOff.join('');
+    // Rounds object
+		$scope.roundsOb = {
+			roundsLeft: 1,
+			rounds: 8
+		};
 	
 		// If interval running (to clear correct interval)
-		var breakInterval = false;
-		var timeInterval = false;
+		var isRunningOb = {
+			breakInterval: false,
+			timeInterval: false
+		};
+
+    // Count down variables
+		$scope.countOb = {
+    	breakLeft: ['00', ':', '10'],
+    	timeLeft: ['00', ':', '20']
+		};	
+		$scope.countJoinedOb = {	
+    	breakLeftJoined: $scope.countOb.breakLeft.join(''),
+    	timeLeftJoined: $scope.countOb.timeLeft.join('')
+		};
+
+    // Option variables. Get copied for tempArray.
+		$scope.optionOb = {
+			timeOff: ['00', ':', '10'],
+    	timeOn: ['00', ':', '20']
+		};
+		$scope.optionJoinedOb = {
+			timeOnJoined: $scope.optionOb.timeOn.join(''),
+    	timeOffJoined: $scope.optionOb.timeOff.join('')
+		};
+    
 	
     // Put 0 if digit less than 10
     function minTwoDigits(n) {
@@ -33,67 +44,67 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 
     // Reduce time by one second
     function subtractTime(time) {
-      var seconds = parseInt(time[2]);
-      var minutes = parseInt(time[0]);
-      if (seconds == '00') {
-        if (minutes == '00') {
-          time[0] = minTwoDigits(minutes);
+      var SECONDS = parseInt(time[2]);
+      var MINUTES = parseInt(time[0]);
+      if (SECONDS == '00') {
+        if (MINUTES == '00') {
+          time[0] = minTwoDigits(MINUTES);
         } else {
           time[2] = '59';
-          time[0] = minTwoDigits(minutes - 1);
+          time[0] = minTwoDigits(MINUTES - 1);
         }
       } else {
-        time[2] = minTwoDigits(seconds - 1);
+        time[2] = minTwoDigits(SECONDS - 1);
       }
     }
 
     // Increase time by one second
     function addTime(time) {
-      var seconds = parseInt(time[2]);
-      var minutes = parseInt(time[0]);
-      if (seconds == '59') {
+      var SECONDS = parseInt(time[2]);
+      var MINUTES = parseInt(time[0]);
+      if (SECONDS == '59') {
         time[2] = '00';
-        time[0] = minTwoDigits(minutes + 1);
+        time[0] = minTwoDigits(MINUTES + 1);
       } else {
-        time[2] = minTwoDigits(seconds + 1);
+        time[2] = minTwoDigits(SECONDS + 1);
       }
     }
 
     // User adjusted rounds value
     $scope.changeRounds = function(value) {
-      var numRounds = parseInt($scope.rounds);
-      if ((value === 'minus') && (numRounds != 0)) {
-        $scope.rounds = numRounds - 1;
+      var NUM_ROUNDS = parseInt($scope.roundsOb.rounds);
+      if ((value === 'minus') && (NUM_ROUNDS >= 2)) {
+        $scope.roundsOb.rounds = NUM_ROUNDS - 1;
       } else if (value === 'plus') {
-        $scope.rounds = numRounds + 1;
+        $scope.roundsOb.rounds = NUM_ROUNDS + 1;
       }
     }
 
     // User adjusted timeOn value
     $scope.changeTimeOn = function(value) {
       if (value === 'minus') {
-        subtractTime($scope.timeOn);
+        subtractTime($scope.optionOb.timeOn);
       } else if (value === 'plus') {
-        addTime($scope.timeOn);
+        addTime($scope.optionOb.timeOn);
       }
-      $scope.timeOnJoined = $scope.timeOn.join('');
-      var temp = $scope.timeOn.slice();
-      $scope.timeLeft = temp;
-      $scope.timeLeftJoined = $scope.timeOnJoined;
+      $scope.optionJoinedOb.timeOnJoined = $scope.optionOb.timeOn.join('');
+      var temp = $scope.optionOb.timeOn.slice();
+      $scope.countOb.timeLeft = temp;
+      $scope.countJoinedOb.timeLeftJoined = $scope.optionJoinedOb.timeOnJoined;
       $scope.$apply;
     }
 
     // User adjusted timeOff value
     $scope.changeTimeOff = function(value) {
       if (value === 'minus') {
-        subtractTime($scope.timeOff);
+        subtractTime($scope.optionOb.timeOff);
       } else if (value === 'plus') {
-        addTime($scope.timeOff);
+        addTime($scope.optionOb.timeOff);
       }
-      $scope.timeOffJoined = $scope.timeOff.join('');
-      var temp = $scope.timeOff.slice();
-      $scope.breakLeft = temp;
-      $scope.breakLeftJoined = $scope.timeOffJoined;
+      $scope.optionJoinedOb.timeOffJoined = $scope.optionOb.timeOff.join('');
+      var temp = $scope.optionOb.timeOff.slice();
+      $scope.countOb.breakLeft = temp;
+      $scope.countJoinedOb.breakLeftJoined = $scope.optionJoinedOb.timeOffJoined;
       $scope.$apply;
     }
 
@@ -101,78 +112,78 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
     $scope.startClock = function() {
       $('#pause-button').removeClass('hidden');
       $('#start-button').addClass('hidden');
-      if ($scope.roundsLeft <= $scope.rounds) {
+      if ($scope.roundsOb.roundsLeft <= $scope.roundsOb.rounds) {
 
         if ($('#time-left').hasClass('hidden')) {
           breakLeftInterval = setInterval(function() {
-						breakInterval = true;
-            var minutes = parseInt($scope.breakLeft[0]);
-            var seconds = parseInt($scope.breakLeft[2]);
-            if (seconds != 00) {
-              $scope.breakLeft[2] = minTwoDigits(seconds - 1);
-              $scope.breakLeftJoined = $scope.breakLeft.join('');
+						isRunningOb.breakInterval = true;
+            var MINUTES = parseInt($scope.countOb.breakLeft[0]);
+            var SECONDS = parseInt($scope.countOb.breakLeft[2]);
+            if (SECONDS != 00) {
+              $scope.countOb.breakLeft[2] = minTwoDigits(SECONDS - 1);
+              $scope.countJoinedOb.breakLeftJoined = $scope.countOb.breakLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04) && ($('#volume-switch').prop('checked'))) {
+              if ((SECONDS >= 02) && (SECONDS <= 04) && ($('#volume-switch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if ((seconds == 01) && ($('#volume-switch').prop('checked'))){
+              } else if ((SECONDS == 01) && ($('#volume-switch').prop('checked'))){
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
-            } else if ((seconds == 00) && (minutes != 00)) {
-              $scope.breakLeft[0] = minTwoDigits(minutes - 1);
-              $scope.breakLeft[2] = '59';
-              $scope.breakLeftJoined = $scope.breakLeft.join('');
+            } else if ((SECONDS == 00) && (MINUTES != 00)) {
+              $scope.countOb.breakLeft[0] = minTwoDigits(MINUTES - 1);
+              $scope.countOb.breakLeft[2] = '59';
+              $scope.countJoinedOb.breakLeftJoined = $scope.countOb.breakLeft.join('');
               $scope.$apply();
             } else {
               $('#time-left').toggleClass('hidden');
               $('#break-left').toggleClass('hidden');
               $('#current-timer').css('background-color', '#a5d6a7');
-              var tempArray = $scope.timeOff.slice();
-              $scope.breakLeft = tempArray;
-              $scope.breakLeftJoined = $scope.timeOffJoined;
+              var tempArray = $scope.optionOb.timeOff.slice();
+              $scope.countOb.breakLeft = tempArray;
+              $scope.countJoinedOb.breakLeftJoined = $scope.optionJoinedOb.timeOffJoined;
               $scope.$apply;
               clearInterval(breakLeftInterval);
-							breakInterval = false;
+							isRunningOb.breakInterval = false;
               $scope.startClock();
             }
 
-          }, 1000);
+          }, 200);
 
         } else {
           timeLeftInterval = setInterval(function() {
-						timeInterval = true;
-            var seconds = parseInt($scope.timeLeft[2]);
-            var minutes = parseInt($scope.timeLeft[0]);
-            if (seconds != 00) {
-              $scope.timeLeft[2] = minTwoDigits(seconds - 1);
-              $scope.timeLeftJoined = $scope.timeLeft.join('');
+						isRunningOb.timeInterval = true;
+            var SECONDS = parseInt($scope.countOb.timeLeft[2]);
+            var MINUTES = parseInt($scope.countOb.timeLeft[0]);
+            if (SECONDS != 00) {
+              $scope.countOb.timeLeft[2] = minTwoDigits(SECONDS - 1);
+              $scope.countJoinedOb.timeLeftJoined = $scope.countOb.timeLeft.join('');
               $scope.$apply();
-              if ((seconds >= 02) && (seconds <= 04) && ($('#volume-switch').prop('checked'))) {
+              if ((SECONDS >= 02) && (SECONDS <= 04) && ($('#volume-switch').prop('checked'))) {
                 var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
-              } else if ((seconds == 01) && ($('#volume-switch').prop('checked'))) {
+              } else if ((SECONDS == 01) && ($('#volume-switch').prop('checked'))) {
                 var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
               }
-            } else if ((seconds == 00) && (minutes != 00)) {
-              $scope.timeLeft[0] = minTwoDigits(minutes - 1);
-              $scope.timeLeft[2] = '59';
-              $scope.timeLeftJoined = $scope.timeLeft.join('');
+            } else if ((SECONDS == 00) && (MINUTES != 00)) {
+              $scope.countOb.timeLeft[0] = minTwoDigits(MINUTES - 1);
+              $scope.countOb.timeLeft[2] = '59';
+              $scope.countJoinedOb.timeLeftJoined = $scope.countOb.timeLeft.join('');
               $scope.$apply();
             } else {
 
-							$scope.roundsLeft = $scope.roundsLeft + 1;
+							$scope.roundsOb.roundsLeft = $scope.roundsOb.roundsLeft + 1;
 
               $('#break-left').toggleClass('hidden');
               $('#time-left').toggleClass('hidden');
               $('#current-timer').css('background-color', '#ef9a9a');
-              var tempArray = $scope.timeOn.slice();
-              $scope.timeLeft = tempArray;
-              $scope.timeLeftJoined = $scope.timeOnJoined;
+              var tempArray = $scope.optionOb.timeOn.slice();
+              $scope.countOb.timeLeft = tempArray;
+              $scope.countJoinedOb.timeLeftJoined = $scope.optionJoinedOb.timeOnJoined;
               $scope.$apply;
               clearInterval(timeLeftInterval);
-							timeInterval = false;
+							isRunningOb.timeInterval = false;
               // Reset break
               $scope.startClock();
             }
-          }, 1000);
+          }, 200);
         }
 
       } else {
@@ -182,12 +193,12 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
 		
 		// Clear correct interval
 		function clearActiveInterval() {
-			if (timeInterval) {
+			if (isRunningOb.timeInterval) {
 				clearInterval(timeLeftInterval);
-				timeInterval = false;
-			} else if (breakInterval) {
+				isRunningOb.timeInterval = false;
+			} else if (isRunningOb.breakInterval) {
 				clearInterval(breakLeftInterval);
-				breakInterval = false;
+				isRunningOb.breakInterval = false;
 			}
 		}
 
@@ -199,15 +210,15 @@ app.controller('tabataAppCtrl', ['$scope', function($scope) {
     }
 
     $scope.clear = function() {
-      var temp = $scope.timeOff.slice();
-      $scope.breakLeft = temp;
-      $scope.breakLeftJoined = $scope.timeOffJoined;
+      var temp = $scope.optionOb.timeOff.slice();
+      $scope.countOb.breakLeft = temp;
+      $scope.countJoinedOb.breakLeftJoined = $scope.optionJoinedOb.timeOffJoined;
 
-      $scope.roundsLeft = 1;
+      $scope.roundsOb.roundsLeft = 1;
 
-      var tempArray = $scope.timeOn.slice();
-      $scope.timeLeft = tempArray;
-      $scope.timeLeftJoined = $scope.timeOnJoined;
+      var tempArray = $scope.optionOb.timeOn.slice();
+      $scope.countOb.timeLeft = tempArray;
+      $scope.countJoinedOb.timeLeftJoined = $scope.optionJoinedOb.timeOnJoined;
       $scope.$apply;
 			
 			$('#time-left').addClass('hidden');

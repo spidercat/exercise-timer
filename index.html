@@ -18,19 +18,6 @@
 
 <body ng-app="tabataApp">
 
-  <!--
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	 Tabata google ad 
-	<ins class="adsbygoogle"
-			 style="display:block"
-			 data-ad-client="ca-pub-7138549700254021"
-			 data-ad-slot="9092086396"
-			 data-ad-format="auto"></ins>
-	<script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
-	</script>
--->
-
   <div id="wrapper" ng-controller="tabataAppCtrl">
 
     <!--Title bar -->
@@ -61,16 +48,16 @@
             <div class="col s9 m8 l8" id="current-timer">
               <div id="time-left" class="hidden">
                 <h3>Time left</h3>
-                <br><span class="time-left-numbers">{{countJoinedOb.timeLeftJoined}}</span>
+                <br><span class="time-left-numbers">}</span>
               </div>
               <div id="break-left">
                 <h3>Break</h3>
-                <br><span class="time-left-numbers">{{countJoinedOb.breakLeftJoined}}</span>
+                <br><span class="time-left-numbers">{{timerTimes.breakTime}}</span>
               </div>
             </div>
             <div class="col s3 m4 l4" id="round">
               <h4>Round</h4>
-              <br><span id="round-numbers">{{roundsOb.roundsLeft}}/{{roundsOb.rounds}}</span>
+              <br><span id="round-numbers">{{rounds.roundsLeft}}/{{rounds.totalRounds}}</span>
             </div>
           </div>
         </div>
@@ -90,21 +77,23 @@
           </div>
           <div class="option-input">
             <p>Time on:</p>
-            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn('minus')">remove</i>
-            <p class="option-time">{{optionJoinedOb.timeOnJoined}}</p>
-            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn('plus')">add</i>
+            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn(optionTimes.timeOn, '-1')">remove</i>
+            <p class="option-time">{{optionTimes.timeOn}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn(optionTimes.timeOn, '+1')">add</i>
           </div>
+					
           <div class="option-input">
             <p>Time off:</p>
-            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff('minus')">remove</i>
-            <p class="option-time">{{optionJoinedOb.timeOffJoined}}</p>
-            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff('plus')">add</i>
+            <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff(optionTimes.timeOff, '-1')">remove</i>
+            <p class="option-time">{{optionTimes.timeOff}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff(optionTimes.timeOff, '+1')">add</i>
           </div>
+					
           <div class="option-input">
             <p>Rounds:</p>
-            <i class="material-icons adjust adjust-minus" ng-click="changeRounds('minus')">remove</i>
-            <p class="option-time">{{roundsOb.rounds}}</p>
-            <i class="material-icons adjust adjust-plus" ng-click="changeRounds('plus')">add</i>
+            <i class="material-icons adjust adjust-minus" ng-click="changeRounds(rounds.totalRounds, '-1')">remove</i>
+            <p class="option-time">{{rounds.totalRounds}}</p>
+            <i class="material-icons adjust adjust-plus" ng-click="changeRounds(rounds.totalRounds, '+1')">add</i>
           </div>
         </div>
       </div>
@@ -149,7 +138,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-  <script type="text/javascript" src="dist/js/app.js"></script>
+  <script type="text/javascript" src="src/js/app.js"></script>
   <script type="text/javascript" src="dist/js/styleswitcher.js"></script>
   <script>
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');

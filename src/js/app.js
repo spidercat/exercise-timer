@@ -18,18 +18,19 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	
 	$scope.optionTimes = {
 		timeOff: "00:10",
-		timeOn: "00:20"
+		timeOn: "00:10"
 	};
 	
 	$scope.timerTimes = {
 		breakTime: "00:10",
-		workTime: "00:20"
-	}
+		workTime: "00:10"
+	};
 	
 	$scope.timerStates = {
 		breakRunning: false,
 		workRunning: false
-	}
+	};
+	
 	
 	
 	// Parse time string int integers
@@ -37,7 +38,7 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		var time = time.split(":");
 		var SECONDS = parseInt(time[1]);
 		var MINUTES = parseInt(time[0]);
-  	return [MINUTES, SECONDS];
+		return [MINUTES, SECONDS];
 	}
 	
 	// Put 0 if digit less than 10
@@ -49,17 +50,16 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	// Adds or removes 1 second
 	$scope.changeTime = function (currentTime, deltaTime) {
 		var time = parseTime(currentTime);
-		if (time[1] === 0 && deltaTime === "-1") {
+		if (time[1] === 00 && deltaTime === "-1") {
 			var newTime = (minTwoDigits(time[0]) + ":" + minTwoDigits(time[1])).toString();
-			return newTime;	
+			return newTime;
 		}
-		
-		var tempTime = minTwoDigits(eval(time[1] + deltaTime));
-		var newTime = (minTwoDigits(time[0]) + ":" + tempTime).toString();
-		console.log(newTime);
-		return newTime;
-
-		
+		else {
+			var tempTime = minTwoDigits(eval(time[1] + deltaTime));
+			var newTime = (minTwoDigits(time[0]) + ":" + tempTime).toString();
+	//		console.log(newTime);
+			return newTime;
+		}
 		// if 60 or -1
 	};
 	
@@ -67,81 +67,113 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	================================================*/
 	
 	// Change the number of rounds
-	$scope.changeRounds = function(currentRounds, deltaRounds) {
+	$scope.changeRounds = function (currentRounds, deltaRounds) {
 		if ($scope.rounds.totalRounds === 0 && deltaRounds === "-1") {
 			return;
 		}
 		$scope.rounds.totalRounds = eval(currentRounds + deltaRounds);
-	}
+	};
 	
 	// Could not find a way to pass property, so this is the hacky temporary solution
-	$scope.changeTimeOff = function(currentTime, deltaTime) {
+	$scope.changeTimeOff = function (currentTime, deltaTime) {
 		var newTime = $scope.changeTime(currentTime, deltaTime);
 		$scope.optionTimes.timeOff = newTime;
 		$scope.timerTimes.breakTime = newTime;
-	}
+	};
 	
-	$scope.changeTimeOn = function(currentTime, deltaTime) {
+	$scope.changeTimeOn = function (currentTime, deltaTime) {
 		var newTime = $scope.changeTime(currentTime, deltaTime);
 		$scope.optionTimes.timeOn = newTime;
 		$scope.timerTimes.workTime = newTime;
-	}
-	
+	};
 	
 	
 	// Switch between break screen and work screen
 	function switchScreens(value) {
-		if (value === "toWork) {
-				
-		}
+		if (value === "toWork") {
+			$("#time-left").removeClass("hidden");
+			$("#break-left").addClass("hidden");
+			$("#current-timer").css("background-color", "#a5d6a7");
+			$scope.timerStates.workRunning = true;
+		} 
 		else {
+			$("#break-left").removeClass("hidden");
+			$("#time-left").addClass("hidden");
+			$("#current-timer").css("background-color", "#ef9a9a");
+			$scope.timerStates.breakRunning = true;
 		}
-				
+		$scope.startClock();
 	} // End switchScreens
 
 	// Start the timer
-	$scope.startClock = function() {
+	$scope.startClock = function () {
 		$("#pause-button").removeClass("hidden");
 		$("#start-button").addClass("hidden");
 		// If there is a round left
 		if ($scope.rounds.roundsLeft <= $scope.rounds.totalRounds) {
-			// Break timer
-			startInterval = setInterval(function() { 
-				if (!$scope.timerStates.workRunning) {
+			if (!$scope.timerStates.workRunning) {
+				breakInterval = setInterval(function () {
 					$scope.timerStates.breakRunning = true;
 					var newTime = $scope.changeTime($scope.timerTimes.breakTime, "-1");
 					$scope.timerTimes.breakTime = newTime;
+//					console.log(newTime);
+						if (newTime === "00:00") {
+							stopInterval();
+							$scope.timerStates.breakRunning = false;
+							var temp = $scope.optionTimes.timeOff;
+							$scope.timerTimes.breakTime = temp;
+							$scope.$apply();
+							switchScreens("toWork");
+						}
 					$scope.$apply();
+				}, 200);
+			}
+			
+			else {
+				workInterval = setInterval(function () {
+					$scope.timerStates.workRunning = true;
+					var newTime = $scope.changeTime($scope.timerTimes.workTime, "-1");
+					$scope.timerTimes.workTime = newTime;
+//					console.log(newTime);
 					if (newTime === "00:00") {
-						switchScreens("toWork");	
+						stopInterval();
+						$scope.timerStates.workRunning = false;
+						var temp = $scope.optionTimes.timeOn;
+						$scope.timerTimes.workTime = temp;
+						$scope.$apply();
+						console.log("time on is" + $scope.optionTimes.timeOn);
+						console.log("work time is" + $scope.timerTimes.workTime);
+						switchScreens("toBreak");
 					}
-				}
-				else {
-					
-				}
-			
-		},1000);
+					$scope.$apply();
+				}, 200);
 		
-			
-			
-			
-			
-		} // End if statement
+			}
+		}
 	}; // End startClock()
 	
-	
-	
-	$scope.pauseClock = function() {
+	// Clear whichever interval is running
+	function stopInterval() {
+		if ($scope.timerStates.workRunning) {
+			clearInterval(workInterval);
+		} 
+		else {
+			clearInterval(breakInterval);
+		}
+	}
+		
+		
+	$scope.pauseClock = function () {
 		$("#pause-button").addClass("hidden");
 		$("#start-button").removeClass("hidden");
-		clearInterval(startInterval);
-	}
+		stopInterval();
+	};
 	
-	$scope.clear = function() {
-		clearInterval(startInterval);
+	$scope.clear = function () {
 		$scope.timerTimes.breakTime = $scope.optionTimes.timeOff;
 		$scope.timerTimes.workTime = $scope.optionTimes.timeOn;
-	}
+		stopInterval();
+	};
 	
 	
 	

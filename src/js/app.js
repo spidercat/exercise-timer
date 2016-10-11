@@ -1,4 +1,6 @@
-//todo: create switch screens function
+// Add minute functionality
+// Add sound
+// Clean code
 
 var app = angular.module("tabataApp", []);
 app.controller("tabataAppCtrl", ["$scope", function ($scope) {
@@ -111,6 +113,7 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$("#start-button").addClass("hidden");
 		// If there is a round left
 		if ($scope.rounds.roundsLeft <= $scope.rounds.totalRounds) {
+
 			if (!$scope.timerStates.workRunning) {
 				breakInterval = setInterval(function () {
 					$scope.timerStates.breakRunning = true;
@@ -141,14 +144,18 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 						var temp = $scope.optionTimes.timeOn;
 						$scope.timerTimes.workTime = temp;
 						$scope.$apply();
-						console.log("time on is" + $scope.optionTimes.timeOn);
-						console.log("work time is" + $scope.timerTimes.workTime);
+						$scope.rounds.roundsLeft++;
 						switchScreens("toBreak");
 					}
 					$scope.$apply();
 				}, 200);
 		
 			}
+		}
+		else {
+			$("#pause-button").addClass("hidden");
+			$("#start-button").removeClass("hidden");
+			$scope.clear();	
 		}
 	}; // End startClock()
 	
@@ -172,7 +179,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	$scope.clear = function () {
 		$scope.timerTimes.breakTime = $scope.optionTimes.timeOff;
 		$scope.timerTimes.workTime = $scope.optionTimes.timeOn;
-		stopInterval();
+		$scope.rounds.roundsLeft = 1;
+		$scope.pauseClock();
 	};
 	
 	

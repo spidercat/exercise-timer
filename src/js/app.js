@@ -1,18 +1,12 @@
-// Add minute functionality
+// Make text editable
 // Add sound
-// Clean code
-
+// If running, mute option buttons?
 var app = angular.module("tabataApp", []);
 app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	
-	// If running, mute option buttons?
-	
-	
-		
 		// Set default volume as on
 	$("#volume-switch").prop("checked", true);
 		
-		// Rounds object
 	$scope.rounds = {
 		roundsLeft: 1,
 		totalRounds: 8
@@ -20,12 +14,12 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	
 	$scope.optionTimes = {
 		timeOff: "00:10",
-		timeOn: "00:10"
+		timeOn: "00:50"
 	};
 	
 	$scope.timerTimes = {
 		breakTime: "00:10",
-		workTime: "00:10"
+		workTime: "00:20"
 	};
 	
 	$scope.timerStates = {
@@ -33,9 +27,9 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		workRunning: false
 	};
 	
+/* ===============================*/
 	
-	
-	// Parse time string int integers
+	// Parse time string to integers
 	function parseTime(time) {
 		var time = time.split(":");
 		var SECONDS = parseInt(time[1]);
@@ -43,27 +37,49 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		return [MINUTES, SECONDS];
 	}
 	
-	// Put 0 if digit less than 10
+	// Put 0 in front if digit less than 10
 	function minTwoDigits(n) {
 		return (n < 10 ? "0" : "") + n;
+	}
+	
+
+	function makeSound(currentSeconds) {
+		if (currentSeconds >= 2) {
+			var beep = new buzz.sound("dist/buzz/beep-07.mp3").play();
+		} else {
+			var endBeep = new buzz.sound("dist/buzz/beep-08b.mp3").play();
+		}		
 	}
 	
 
 	// Adds or removes 1 second
 	$scope.changeTime = function (currentTime, deltaTime) {
 		var time = parseTime(currentTime);
-		if (time[1] === 00 && deltaTime === "-1") {
-			var newTime = (minTwoDigits(time[0]) + ":" + minTwoDigits(time[1])).toString();
+		var minutes = time[0];
+		var seconds = time[1];
+		
+		// If interval is running, make sound
+		if (seconds <= 4 && $("#volume-switch").prop("checked") && ($scope.timerStates.breakRunning || $scope.timerStates.workRunning)) {
+			makeSound(seconds);
+		}
+		if (seconds === 59 && deltaTime === "+1") {
+			var newTime = (minTwoDigits(minutes + 1) + ":" + "00");
 			return newTime;
 		}
-		else {
-			var tempTime = minTwoDigits(eval(time[1] + deltaTime));
-			var newTime = (minTwoDigits(time[0]) + ":" + tempTime).toString();
-	//		console.log(newTime);
+		if (minutes >= 1 && seconds === 0 && deltaTime === "-1") {
+			var newTime = (minTwoDigits(minutes - 1) + ":" + "59");
 			return newTime;
 		}
-		// if 60 or -1
+		if (seconds === 0 && deltaTime === "-1") {
+			var newTime = (minTwoDigits(minutes) + ":" + minTwoDigits(seconds)).toString();
+			return newTime;
+		} else {
+			var tempTime = minTwoDigits(eval(seconds + deltaTime));
+			var newTime = (minTwoDigits(minutes) + ":" + tempTime).toString();
+			return newTime;
+		}
 	};
+	
 	
 	/* Functions to change the option numbers
 	================================================*/
@@ -97,8 +113,7 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 			$("#break-left").addClass("hidden");
 			$("#current-timer").css("background-color", "#a5d6a7");
 			$scope.timerStates.workRunning = true;
-		} 
-		else {
+		} else {
 			$("#break-left").removeClass("hidden");
 			$("#time-left").addClass("hidden");
 			$("#current-timer").css("background-color", "#ef9a9a");
@@ -106,11 +121,13 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		}
 		$scope.startClock();
 	} // End switchScreens
+	
 
 	// Start the timer
 	$scope.startClock = function () {
 		$("#pause-button").removeClass("hidden");
 		$("#start-button").addClass("hidden");
+
 		// If there is a round left
 		if ($scope.rounds.roundsLeft <= $scope.rounds.totalRounds) {
 
@@ -119,9 +136,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 					$scope.timerStates.breakRunning = true;
 					var newTime = $scope.changeTime($scope.timerTimes.breakTime, "-1");
 					$scope.timerTimes.breakTime = newTime;
-//					console.log(newTime);
 						if (newTime === "00:00") {
-							stopInterval();
+							stopCurrentInterval();
 							$scope.timerStates.breakRunning = false;
 							var temp = $scope.optionTimes.timeOff;
 							$scope.timerTimes.breakTime = temp;
@@ -130,16 +146,13 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 						}
 					$scope.$apply();
 				}, 200);
-			}
-			
-			else {
+			} else if (!$scope.timerStates.breakRunning) {
 				workInterval = setInterval(function () {
 					$scope.timerStates.workRunning = true;
 					var newTime = $scope.changeTime($scope.timerTimes.workTime, "-1");
 					$scope.timerTimes.workTime = newTime;
-//					console.log(newTime);
 					if (newTime === "00:00") {
-						stopInterval();
+						stopCurrentInterval();
 						$scope.timerStates.workRunning = false;
 						var temp = $scope.optionTimes.timeOn;
 						$scope.timerTimes.workTime = temp;
@@ -149,10 +162,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 					}
 					$scope.$apply();
 				}, 200);
-		
 			}
-		}
-		else {
+		} else {
 			$("#pause-button").addClass("hidden");
 			$("#start-button").removeClass("hidden");
 			$scope.clear();	
@@ -160,20 +171,20 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	}; // End startClock()
 	
 	// Clear whichever interval is running
-	function stopInterval() {
+	function stopCurrentInterval() {
 		if ($scope.timerStates.workRunning) {
+			$scope.timerStates.workRunning = false;
 			clearInterval(workInterval);
-		} 
-		else {
+		} else {
+			$scope.timerStates.breakRunning = false;
 			clearInterval(breakInterval);
 		}
 	}
 		
-		
 	$scope.pauseClock = function () {
 		$("#pause-button").addClass("hidden");
 		$("#start-button").removeClass("hidden");
-		stopInterval();
+		stopCurrentInterval();
 	};
 	
 	$scope.clear = function () {
@@ -183,9 +194,5 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$scope.pauseClock();
 	};
 	
-	
-	
-	
-	
-
+																 
 }]); // End controller

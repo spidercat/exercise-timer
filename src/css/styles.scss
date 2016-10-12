@@ -21,6 +21,11 @@ $button-color-dark: #f57c00; // orange darken-2
 /* Default/layout
 ===================================*/
 
+// For flash of unstyled content
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 
 html {
 	color: $dark-grey;

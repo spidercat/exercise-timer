@@ -13,7 +13,7 @@
   <link type="text/css" rel="stylesheet" href="dist/css/styles.css" title="default">
   <link type="text/css" rel="alternate stylesheet" href="dist/css/darkstyles.css" title="dark-theme">
   <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 </head>
 
 <body ng-app="tabataApp">
@@ -48,16 +48,16 @@
             <div class="col s9 m8 l8" id="current-timer">
               <div id="time-left" class="hidden">
                 <h3>Time left</h3>
-                <br><span class="time-left-numbers">{{timerTimes.workTime}}</span>
+                <br><span class="time-left-numbers" ng-cloak>{{timerTimes.workTime}}</span>
               </div>
               <div id="break-left">
                 <h3>Break</h3>
-                <br><span class="time-left-numbers">{{timerTimes.breakTime}}</span>
+                <br><span class="time-left-numbers" ng-cloak>{{timerTimes.breakTime}}</span>
               </div>
             </div>
             <div class="col s3 m4 l4" id="round">
               <h4>Round</h4>
-              <br><span id="round-numbers">{{rounds.roundsLeft}}/{{rounds.totalRounds}}</span>
+              <br><span id="round-numbers" ng-cloak>{{rounds.roundsLeft}}/{{rounds.totalRounds}}</span>
             </div>
           </div>
         </div>
@@ -78,21 +78,21 @@
           <div class="option-input">
             <p>Time on:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeTimeOn(optionTimes.timeOn, '-1')">remove</i>
-            <p class="option-time">{{optionTimes.timeOn}}</p>
+            <p class="option-time" ng-cloak>{{optionTimes.timeOn}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeTimeOn(optionTimes.timeOn, '+1')">add</i>
           </div>
 					
           <div class="option-input">
             <p>Time off:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeTimeOff(optionTimes.timeOff, '-1')">remove</i>
-            <p class="option-time">{{optionTimes.timeOff}}</p>
+            <p class="option-time" ng-cloak>{{optionTimes.timeOff}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeTimeOff(optionTimes.timeOff, '+1')">add</i>
           </div>
 					
           <div class="option-input">
             <p>Rounds:</p>
             <i class="material-icons adjust adjust-minus" ng-click="changeRounds(rounds.totalRounds, '-1')">remove</i>
-            <p class="option-time">{{rounds.totalRounds}}</p>
+            <p class="option-time" ng-cloak>{{rounds.totalRounds}}</p>
             <i class="material-icons adjust adjust-plus" ng-click="changeRounds(rounds.totalRounds, '+1')">add</i>
           </div>
         </div>
@@ -136,7 +136,6 @@
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="src/js/app.js"></script>
   <script type="text/javascript" src="dist/js/styleswitcher.js"></script>
@@ -144,16 +143,6 @@
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   </script>
   <script src="dist/buzz/buzz.min.js"></script>
-<!--
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-72043611-1', 'auto');
-    ga('send', 'pageview');
-  </script>
--->
 </body>
 
 </html>

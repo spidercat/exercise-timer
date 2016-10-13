@@ -1,5 +1,8 @@
 /* Default/layout
 ===================================*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
 html {
   color: #212121;
   background-color: #fdfdfd; }
@@ -379,3 +382,45 @@ footer {
 @media screen and (max-width: 350px) {
   #about-tabata, #about-developer {
     width: 18em; } }
+
+/* IE specific media queries. Ugh.
+==============================================*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 765px) {
+  .adjust-minus {
+    margin-left: .3em; }
+  .adjust-plus {
+    margin-left: 4.8em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 680px) {
+  .adjust-minus {
+    margin-left: .4em; }
+  .adjust-plus {
+    margin-left: 4.1em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 600px) {
+  .adjust-minus {
+    margin-left: 2em; }
+  .adjust-plus {
+    margin-left: 14em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 520px) {
+  .adjust-plus {
+    margin-left: 12em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 450px) {
+  .adjust-plus {
+    margin-left: 10em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 390px) {
+  .adjust-plus {
+    margin-left: 7.5em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 340px) {
+  .adjust-minus {
+    margin-left: 1em; }
+  .adjust-plus {
+    margin-left: 6.5em; } }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 300px) {
+  .adjust-plus {
+    margin-left: 5.5em; } }

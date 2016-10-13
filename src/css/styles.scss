@@ -240,7 +240,6 @@ footer {
 		padding-right: 1em;
 		margin-right: 7em;
 	}
-	
 }
 
 
@@ -277,7 +276,6 @@ footer {
 		float: right;
 		padding-right: 1em;	
 	}
-	
 } // End media 1115px
 
 // grid - m
@@ -301,7 +299,6 @@ footer {
 		width: 30em;
 		margin-left: 2em;
 	}
-	
 } // End media 992px (grid -m)
 
 @media screen and (max-width: 915px) {
@@ -315,7 +312,6 @@ footer {
 		float: right;
 		padding-right: 1em;	
 	}
-	
 } // End media 915px
 
 @media screen and (max-width: 840px) {
@@ -348,7 +344,6 @@ footer {
 	#css-switch {
 		margin-left: 80%;	
 	}
-
 } // End media 840px
 
 @media screen and (max-width: 765px) {
@@ -370,13 +365,10 @@ footer {
 		margin-left: 1em;
 		margin-top: -.8em;
 	}
-	
-	
 } // End media 764px
 
 
 @media screen and (max-width: 747px) {
-
 	#about-tabata {
 		width: 23em;
 		margin-left: .4em;
@@ -386,7 +378,6 @@ footer {
 		width: 23em;
 		padding-right: .5em;	
 	}
-
 } // End media 747px
 
 
@@ -400,9 +391,7 @@ footer {
 		width: 20em;
 		padding-right: .2em;	
 	}
-	
 }
-
 
 
 // grid -s
@@ -488,8 +477,6 @@ footer {
 			padding-right: .3em;
 		}
 	}
-	
-
 } // End media 600px (grid -s)
 
 @media screen and (max-width: 500px) {
@@ -538,7 +525,6 @@ footer {
 			font-size: 2.5em;
 		}
 	}
-	
 } // End media 500px
 
 @media screen and (max-width: 410px) {
@@ -578,12 +564,83 @@ footer {
 			margin-bottom: .5em;
 		}
 	}
-
 } // End media 370px
 
 @media screen and (max-width: 350px) {
 	#about-tabata, #about-developer {
 		width: 18em;
 	}
-	
 } // End media 350px
+
+
+
+/* IE specific media queries. Ugh.
+==============================================*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 765px) {
+	.adjust-minus {
+		margin-left: .3em;
+	}
+	
+	.adjust-plus {
+		margin-left: 4.8em;
+	}
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 680px) {
+	.adjust-minus {
+		margin-left: .4em;
+	}
+	
+	.adjust-plus {
+		margin-left: 4.1em;
+	}
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 600px) {
+	.adjust-minus {
+		margin-left: 2em;
+	}
+
+	.adjust-plus {
+		margin-left: 14em;
+	}	
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 520px) {
+	.adjust-plus {
+		margin-left: 12em;
+	}	
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 450px) {
+	.adjust-plus {
+		margin-left: 10em;
+	}		
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 390px) {
+	.adjust-plus {
+		margin-left: 7.5em;
+	}	
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 340px) {
+	.adjust-minus {
+		margin-left: 1em;
+	}
+	
+	.adjust-plus {
+		margin-left: 6.5em;
+	}	
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (max-width: 300px) {
+	.adjust-plus {
+		margin-left: 5.5em;
+	}	
+}
+
+
+
+
+	

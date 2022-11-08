@@ -32,7 +32,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	};
 	
 	$scope.timerStates = {
-		workRunning: false
+		workRunning: false,
+		stopwatch: []
 	};
 	
 /* ===============================*/
@@ -168,11 +169,17 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	$scope.clear = function () {
 		$scope.timerTimes.workTime = $scope.optionTimes.timeOn;
 		$scope.timerTimes.stopwatch = "00:00"
+		$scope.timerStates.stopwatch = []
 		$scope.rounds.roundsLeft = 1;
 		$("#break-left").removeClass("hidden");
 		$("#time-left").addClass("hidden");
 		$("#current-timer").css("background-color", "#ef9a9a");
 		$scope.pauseClock();
 	};
+
+	$scope.sampleStopwatch = function () {
+		$scope.timerStates.stopwatch[$scope.rounds.roundsLeft - 1] = $scope.timerTimes.stopwatch
+		console.log("stopwatch", $scope.timerStates.stopwatch)
+	}
 																 
 }]); // End controller

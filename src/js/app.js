@@ -11,18 +11,21 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	
 		// Set default volume as on
 	$("#volume-switch").prop("checked", true);
-		
+	
+	storedTotalRounds = localStorage.getItem("totalRounds")
+	storedTimeOn = localStorage.getItem("timeOn")
+
 	$scope.rounds = {
 		roundsLeft: 1,
-		totalRounds: 8
+		totalRounds: storedTotalRounds ?? 8
 	};
 	
 	$scope.optionTimes = {
-		timeOn: "00:20"
+		timeOn: storedTimeOn ?? "00:20"
 	};
 	
 	$scope.timerTimes = {
-		workTime: "00:20"
+		workTime: storedTimeOn ?? "00:20"
 	};
 	
 	$scope.timerStates = {
@@ -84,12 +87,14 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 			return;
 		}
 		$scope.rounds.totalRounds = eval(currentRounds + deltaRounds);
+		localStorage.setItem("totalRounds", $scope.rounds.totalRounds);
 	};
 	
 	$scope.changeTimeOn = function (currentTime, deltaTime) {
 		var newTime = $scope.changeTime(currentTime, deltaTime);
 		$scope.optionTimes.timeOn = newTime;
 		$scope.timerTimes.workTime = newTime;
+		localStorage.setItem("timeOn", newTime);
 	};
 		
 	// Switch between break screen and work screen

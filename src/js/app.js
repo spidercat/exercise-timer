@@ -118,7 +118,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$("#start-button").addClass("hidden");
 		
 		switchScreens("toWork")
-		if ($scope.rounds.roundsLeft == $scope.rounds.totalRounds) {
+		if ($scope.rounds.roundsLeft == $scope.rounds.totalRounds && 
+			$scope.timerTimes.workTime === "00:00") {
 			return
 		}
 

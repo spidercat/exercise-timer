@@ -18,17 +18,14 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	};
 	
 	$scope.optionTimes = {
-		timeOff: "00:10",
 		timeOn: "00:20"
 	};
 	
 	$scope.timerTimes = {
-		breakTime: "00:10",
 		workTime: "00:20"
 	};
 	
 	$scope.timerStates = {
-		breakRunning: false,
 		workRunning: false
 	};
 	
@@ -89,13 +86,6 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$scope.rounds.totalRounds = eval(currentRounds + deltaRounds);
 	};
 	
-	// Could not find a way to pass property, so this is the hacky temporary solution
-	$scope.changeTimeOff = function (currentTime, deltaTime) {
-		var newTime = $scope.changeTime(currentTime, deltaTime);
-		$scope.optionTimes.timeOff = newTime;
-		$scope.timerTimes.breakTime = newTime;
-	};
-	
 	$scope.changeTimeOn = function (currentTime, deltaTime) {
 		var newTime = $scope.changeTime(currentTime, deltaTime);
 		$scope.optionTimes.timeOn = newTime;
@@ -115,7 +105,6 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 			$("#current-timer").css("background-color", "#ef9a9a");
 			$scope.timerStates.breakRunning = true;
 		}
-		$scope.startClock();
 	} // End switchScreens
 	
 	// Start the timer
@@ -123,72 +112,48 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$("#pause-button").removeClass("hidden");
 		$("#start-button").addClass("hidden");
 		
+		switchScreens("toWork")
+		if ($scope.rounds.roundsLeft == $scope.rounds.totalRounds) {
+			return
+		}
+
 		// If work is showing on click, change state
 		if ($("#break-left").hasClass("hidden")) {
 			$scope.timerStates.workRunning = true;	
 		}
 		
-		
-		// If there is a round left
-		if ($scope.rounds.roundsLeft <= $scope.rounds.totalRounds) {
-			if (!$scope.timerStates.workRunning) {
-				breakInterval = setInterval(function () {
-					$scope.timerStates.breakRunning = true;
-					var newTime = $scope.changeTime($scope.timerTimes.breakTime, "-1");
-					$scope.timerTimes.breakTime = newTime;
-					if (newTime === "00:00") {
-						stopCurrentInterval();
-						$scope.timerStates.breakRunning = false;
-						var temp = $scope.optionTimes.timeOff;
-						$scope.timerTimes.breakTime = temp;
-						$scope.$apply();
-						switchScreens("toWork");
-					}
+		workInterval = setInterval(function () {
+			$scope.timerStates.workRunning = true;
+			var newTime = $scope.changeTime($scope.timerTimes.workTime, "-1");
+			$scope.timerTimes.workTime = newTime;
+			if (newTime === "00:00") {
+				if ($scope.rounds.roundsLeft == $scope.rounds.totalRounds) {
+					clearInterval(workInterval)
 					$scope.$apply();
-				}, 1000);
-			} else if (!$scope.timerStates.breakRunning) {
-				workInterval = setInterval(function () {
-					$scope.timerStates.workRunning = true;
-					var newTime = $scope.changeTime($scope.timerTimes.workTime, "-1");
-					$scope.timerTimes.workTime = newTime;
-					if (newTime === "00:00") {
-						stopCurrentInterval();
-						$scope.timerStates.workRunning = false;
-						var temp = $scope.optionTimes.timeOn;
-						$scope.timerTimes.workTime = temp;
-						$scope.$apply();
-						$scope.rounds.roundsLeft++;
-						switchScreens("toBreak");
-					}
-					$scope.$apply();
-				}, 1000);
+					return
+				}
+				var temp = $scope.optionTimes.timeOn;
+				$scope.timerTimes.workTime = temp;
+				$scope.$apply();
+				$scope.rounds.roundsLeft++;
 			}
-		} else {
-			$("#pause-button").addClass("hidden");
-			$("#start-button").removeClass("hidden");
-			$scope.clear();
-		}
+			$scope.$apply();
+		}, 1000);
 	}; // End startClock()
 	
 	// Clear whichever interval is running
 	function stopCurrentInterval() {
-		if ($scope.timerStates.workRunning) {
-			$scope.timerStates.workRunning = false;
-			clearInterval(workInterval);
-		} else {
-			$scope.timerStates.breakRunning = false;
-			clearInterval(breakInterval);
-		}
+		clearInterval(workInterval);
 	}
 		
 	$scope.pauseClock = function () {
 		$("#pause-button").addClass("hidden");
 		$("#start-button").removeClass("hidden");
 		stopCurrentInterval();
+		switchScreens("toBreak")
 	};
 	
 	$scope.clear = function () {
-		$scope.timerTimes.breakTime = $scope.optionTimes.timeOff;
 		$scope.timerTimes.workTime = $scope.optionTimes.timeOn;
 		$scope.rounds.roundsLeft = 1;
 		$("#break-left").removeClass("hidden");

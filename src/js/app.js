@@ -182,6 +182,15 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		console.log("stopwatch", $scope.timerStates.stopwatch)
 	}
 																 
+	$scope.copyToClipboard = function () {
+		now = new Date()
+		text = `${now.getDate()}/${now.getMonth()}/${now.getFullYear()},`
+		text += `${$scope.optionTimes.timeOn},`
+		text += $scope.timerStates.stopwatch.join(",")
+		console.log(text)
+		Clipboard.copy(text)
+	}
+																 
 }]); // End controller
 
 // Copy to clipboard function imported from:

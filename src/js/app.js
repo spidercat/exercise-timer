@@ -33,7 +33,8 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 	
 	$scope.timerStates = {
 		workRunning: false,
-		stopwatch: []
+		stopwatch: [],
+		currentStopwatch: "00:00"
 	};
 	
 /* ===============================*/
@@ -138,6 +139,9 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 			var newStopwatch = $scope.changeTime($scope.timerTimes.stopwatch, "+1");
 			$scope.timerTimes.workTime = newTime;
 			$scope.timerTimes.stopwatch = newStopwatch
+			if ($scope.timerStates.stopwatch[$scope.rounds.roundsLeft - 1] === undefined) {
+				$scope.timerStates.currentStopwatch = newStopwatch
+			}
 			if (newTime === "00:00") {
 				if ($scope.rounds.roundsLeft == $scope.rounds.totalRounds) {
 					clearInterval(workInterval)
@@ -170,6 +174,7 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 		$scope.timerTimes.workTime = $scope.optionTimes.timeOn;
 		$scope.timerTimes.stopwatch = "00:00"
 		$scope.timerStates.stopwatch = []
+		$scope.timerStates.currentStopwatch = "00:00"
 		$scope.rounds.roundsLeft = 1;
 		$("#break-left").removeClass("hidden");
 		$("#time-left").addClass("hidden");
@@ -179,6 +184,7 @@ app.controller("tabataAppCtrl", ["$scope", function ($scope) {
 
 	$scope.sampleStopwatch = function () {
 		$scope.timerStates.stopwatch[$scope.rounds.roundsLeft - 1] = $scope.timerTimes.stopwatch
+		$scope.timerStates.currentStopwatch = $scope.timerTimes.stopwatch
 		console.log("stopwatch", $scope.timerStates.stopwatch)
 	}
 																 
